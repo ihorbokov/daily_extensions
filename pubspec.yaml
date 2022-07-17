@@ -1,0 +1,7 @@
+name: daily_extensions
+description: Common extensions for daily use.
+version: 1.0.0
+homepage: https://github.com/phimary/daily_extensions
+
+environment:
+  sdk: '>=2.17.5 <3.0.0'
