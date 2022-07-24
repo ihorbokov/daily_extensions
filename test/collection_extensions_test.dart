@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('List Extensions', () {
-    final testList = [1, 2, 3, 4, 5];
+    final testList = <int>[];
     const testEmptyList = <int>[];
     const List<int>? testNullableList = null;
 
@@ -14,6 +14,13 @@ void main() {
       final random = testList.random;
       expect(testList.contains(random), isTrue);
       expect(() => testEmptyList.random, throwsRangeError);
+    });
+
+    test('returns value in empty case', () {
+      final list = testList.ifEmpty([2]);
+      expect(list, isA<List>());
+      expect(list.toString(), '[1, 2, 3, 4, 5]');
+      expect(testEmptyList.ifEmpty(testList).toString(), '[1, 2, 3, 4, 5]');
     });
 
     test('moves element to the specified position', () {
@@ -37,7 +44,16 @@ void main() {
   });
 
   group('Set Extensions', () {
+    final testSet = {1, 2, 3, 4, 5};
+    const testEmptySet = <int>{};
     const Set<int>? testNullableSet = null;
+
+    test('returns value in empty case', () {
+      final set = testSet.ifEmpty({2});
+      expect(set, isA<Set>());
+      expect(set.toString(), '{1, 2, 3, 4, 5}');
+      expect(testEmptySet.ifEmpty(testSet).toString(), '{1, 2, 3, 4, 5}');
+    });
 
     test('creates empty modifiable set if current is null', () {
       final set = testNullableSet.orEmpty;
@@ -51,6 +67,16 @@ void main() {
     final testIterable = Iterable.generate(5, (index) => index + 1);
     const testEmptyIterable = Iterable<int>.empty();
     const Iterable<int>? testNullableIterable = null;
+
+    test('returns value in empty case', () {
+      final iterable = testIterable.ifEmpty([2]);
+      expect(iterable, isA<Iterable>());
+      expect(iterable.toString(), '(1, 2, 3, 4, 5)');
+      expect(
+        testEmptyIterable.ifEmpty(testIterable).toString(),
+        '(1, 2, 3, 4, 5)',
+      );
+    });
 
     test('creates fixed-length list', () {
       final list = testIterable.toFixedList();
@@ -103,6 +129,13 @@ void main() {
     final testMap = {2022: 'Mary'};
     const testEmptyMap = <int, String>{};
     const Map<int, String>? testNullableMap = null;
+
+    test('returns value in empty case', () {
+      final map = testMap.ifEmpty({1: 'Hello'});
+      expect(map, isA<Map>());
+      expect(map.toString(), '{2022: Mary}');
+      expect(testEmptyMap.ifEmpty(testMap).toString(), '{2022: Mary}');
+    });
 
     test('creates empty modifiable map if current is null', () {
       final map = testNullableMap.orEmpty;

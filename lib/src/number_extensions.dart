@@ -6,6 +6,10 @@ extension IntX on int {
   /// Returns all digits of this [int].
   List<int> get digits => '${abs()}'.charArray.mapToList(int.parse);
 
+  /// Returns this [int] if it's not zero,
+  /// otherwise returns [value].
+  int ifZero(int value) => this == 0 ? value : this;
+
   /// Returns [int] which consists of the first [n] digits of this [int].
   ///
   /// The parameter [n] must be an integer satisfying:
@@ -48,6 +52,10 @@ extension DoubleX on double {
     return double.parse('${isNegative ? '-' : ''}0.${parts[1]}');
   }
 
+  /// Returns this [double] if it's not zero,
+  /// otherwise returns [value].
+  double ifZero(double value) => this == 0 ? value : this;
+
   /// Returns closest [double] with [fractionDigits] digits precision
   /// after the decimal point.
   ///
@@ -67,6 +75,10 @@ extension NumX on num {
 
   /// Returns true if this [num] is [double].
   bool get isDouble => !isInt;
+
+  /// Returns this [num] if it's not zero,
+  /// otherwise returns [value].
+  num ifZero(num value) => this == 0 ? value : this;
 
   /// Truncates this [num] to [int] if this [num] is [int],
   /// otherwise returns this [num].

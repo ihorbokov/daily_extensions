@@ -8,7 +8,8 @@ extension StringX on String {
   bool get isNum => num.tryParse(this) != null;
 
   /// Whether this [String] is [bool].
-  bool get isBool => equalsAny(['true', 'false', 'yes', 'no', 'on', 'off']);
+  bool get isBool => equalsAny(
+      ['true', 'false', 'yes', 'no', 'y', 'n', 'on', 'off', '1', '0']);
 
   /// Whether this [String] consists only Latin letters.
   bool get isAlphabetic => hasMatch(r'^[a-zA-Z]+$');
@@ -23,12 +24,6 @@ extension StringX on String {
   /// Whether this [String] is email.
   bool get isEmail => hasMatch(
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
-
-  /// Whether this [String] is phone number.
-  bool get isPhoneNumber {
-    if (length > 16 || length < 9) return false;
-    return hasMatch(r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$');
-  }
 
   /// Whether this [String] is MD5.
   bool get isMd5 => hasMatch(r'^[a-f0-9]{32}$');
@@ -60,16 +55,39 @@ extension StringX on String {
   bool get isHexadecimal => hasMatch(r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$');
 
   /// Whether this [String] is middle password.
+  ///
+  /// The password must satisfy:
+  /// `At least: 1 upper case letter, 1 digit,
+  /// 1 lower case letter and length >= 6`.
   bool get isMiddlePassword =>
       hasMatch(r'^(?=.*([A-Z]){1,})(?=.*[0-9]{1,})(?=.*[a-z]{1,}).{6,100}$');
 
   /// Whether this [String] is strong password.
+  ///
+  /// The password must satisfy:
+  /// `At least: 1 upper case letter, 1 special symbol,
+  /// 1 digit, 1 lower case letter and length >= 8`.
   bool get isStrongPassword => hasMatch(
       r'^(?=.*([A-Z]){1,})(?=.*[!@#$&*]{1,})(?=.*[0-9]{1,})(?=.*[a-z]{1,}).{8,100}$');
 
   /// Whether this [String] is UUID.
   bool get isUuid => hasMatch(
       r'^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$');
+
+  /// Whether this [String] is phone number in length range
+  /// between excluded [min] and [max].
+  bool isPhoneNumber({int min = 9, int max = 16}) {
+    if (length < min || length > max) return false;
+    return hasMatch(r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$');
+  }
+
+  /// Returns this [String] if it's not empty,
+  /// otherwise returns [value].
+  String ifEmpty(String value) => isEmpty ? value : this;
+
+  /// Returns this [String] if it's not blank,
+  /// otherwise returns [value].
+  String ifBlank(String value) => isBlank ? value : this;
 
   /// Returns char's array of this [String].
   List<String> get charArray => isBlank ? [] : split('');
@@ -78,7 +96,7 @@ extension StringX on String {
   String get reversed => charArray.reversed.join();
 
   /// Casts this [String] to [bool].
-  bool asBool() => equalsAny(['true', 'yes', 'on']);
+  bool asBool() => equalsAny(['true', 'yes', 'y', 'on', '1']);
 
   /// Capitalize the first letter of this [String].
   String capitalizeFirst() {
@@ -86,7 +104,7 @@ extension StringX on String {
     return this[0].toUpperCase() + substring(1).toLowerCase();
   }
 
-  /// Capitalize this [String].
+  /// Capitalize the first letter of each word in this [String].
   String capitalizeAll() {
     if (isBlank) return '';
     return splitBySpaces().map((word) => word.capitalizeFirst()).join(' ');

@@ -27,6 +27,10 @@ void main() {
       expect('NO'.isBool, isTrue);
       expect('oN'.isBool, isTrue);
       expect('oFF'.isBool, isTrue);
+      expect('y'.isBool, isTrue);
+      expect('N'.isBool, isTrue);
+      expect('0'.isBool, isTrue);
+      expect('1'.isBool, isTrue);
     });
 
     test('checks if string is alphabetic', () {
@@ -52,14 +56,6 @@ void main() {
       expect('info@phimary.com'.isEmail, isTrue);
       expect('info@phimary'.isEmail, isFalse);
       expect('info@phimary.c'.isEmail, isFalse);
-    });
-
-    test('checks if string is phone number', () {
-      expect('+380501231212'.isPhoneNumber, isTrue);
-      expect('(888) 8881118'.isPhoneNumber, isTrue);
-      expect('(888) 888-1118'.isPhoneNumber, isTrue);
-      expect('888'.isPhoneNumber, isFalse);
-      expect('(888) 888111222222222'.isPhoneNumber, isFalse);
     });
 
     test('checks if string is MD5', () {
@@ -124,6 +120,29 @@ void main() {
       expect('123e4567-e89b-12d3-a4561426614174000'.isUuid, isFalse);
     });
 
+    test('checks if string is phone number', () {
+      expect('+380501231212'.isPhoneNumber(), isTrue);
+      expect('(888) 8881118'.isPhoneNumber(), isTrue);
+      expect('(888) 888-1118'.isPhoneNumber(), isTrue);
+      expect('888'.isPhoneNumber(), isFalse);
+      expect('(888) 888111222222222'.isPhoneNumber(), isFalse);
+    });
+
+    test('returns value in empty case', () {
+      final value = 'Hello'.ifEmpty('World');
+      expect(value, isA<String>());
+      expect(value, 'Hello');
+      expect(''.ifEmpty('World'), 'World');
+    });
+
+    test('returns value in blank case', () {
+      final value = 'Hello'.ifBlank('World');
+      expect(value, isA<String>());
+      expect(value, 'Hello');
+      expect(''.ifBlank('World'), 'World');
+      expect('   '.ifBlank('World'), 'World');
+    });
+
     test('returns array of chars', () {
       expect(''.charArray.toString(), '[]');
       expect('Hello!'.charArray.toString(), '[H, e, l, l, o, !]');
@@ -143,6 +162,10 @@ void main() {
       expect('No'.asBool(), isFalse);
       expect('oN'.asBool(), isTrue);
       expect('oFF'.asBool(), isFalse);
+      expect('y'.asBool(), isTrue);
+      expect('N'.asBool(), isFalse);
+      expect('1'.asBool(), isTrue);
+      expect('0'.asBool(), isFalse);
       expect('Hello world!'.asBool(), isFalse);
     });
 
@@ -198,6 +221,12 @@ void main() {
       expect(''.leaveOnlyLetters(), '');
       expect('hello'.leaveOnlyLetters(), 'hello');
       expect('Hello100 World500!'.leaveOnlyLetters(), 'HelloWorld');
+    });
+
+    test('checks if has match', () {
+      expect(''.hasMatch(''), isTrue);
+      expect('hello'.hasMatch('ll'), isTrue);
+      expect('hello'.hasMatch(r'^\d+$'), isFalse);
     });
 
     test('splits by spaces', () {

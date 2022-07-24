@@ -5,6 +5,10 @@ extension ListX<T> on List<T> {
   /// Returns a random element from this [List].
   T get random => this[Random().nextInt(length)];
 
+  /// Returns this [List] if it's not empty,
+  /// otherwise returns [value].
+  List<T> ifEmpty(List<T> value) => isEmpty ? value : this;
+
   /// Moves the [element] to the specified [index] position in this [List].
   void move(T element, int index) {
     RangeError.checkValidIndex(index, this, 'index');
@@ -21,8 +25,19 @@ extension ListX<T> on List<T> {
   }
 }
 
+/// Extensions for [Set].
+extension SetX<T> on Set<T> {
+  /// Returns this [Set] if it's not empty,
+  /// otherwise returns [value].
+  Set<T> ifEmpty(Set<T> value) => isEmpty ? value : this;
+}
+
 /// Extensions for [Iterable].
 extension IterableX<T> on Iterable<T> {
+  /// Returns this [Iterable] if it's not empty,
+  /// otherwise returns [value].
+  Iterable<T> ifEmpty(Iterable<T> value) => isEmpty ? value : this;
+
   /// Creates a fixed-length [List] containing the elements of this [Iterable].
   List<T> toFixedList() => toList(growable: false);
 
@@ -45,6 +60,10 @@ extension IterableX<T> on Iterable<T> {
 
 /// Extensions for [Map].
 extension MapX<K, V> on Map<K, V> {
+  /// Returns this [Map] if it's not empty,
+  /// otherwise returns [value].
+  Map<K, V> ifEmpty(Map<K, V> value) => isEmpty ? value : this;
+
   /// Creates an unmodifiable [Map] containing the entries of this [Map].
   Map<K, V> toUnmodifiableMap() => Map.unmodifiable(this);
 }

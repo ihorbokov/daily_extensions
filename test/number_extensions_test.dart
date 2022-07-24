@@ -9,6 +9,13 @@ void main() {
       expect(0.digits, [0]);
     });
 
+    test('returns value in zero case', () {
+      final value = 2022.ifZero(2);
+      expect(value, isA<int>());
+      expect(value, 2022);
+      expect(0.ifZero(2022), 2022);
+    });
+
     test('returns int which consists of the first [n] digits', () {
       expect(2022.first(2), 20);
       expect((-12).first(1), 1);
@@ -47,6 +54,13 @@ void main() {
       expect(() => double.nan.fractional, throwsArgumentError);
     });
 
+    test('returns value in zero case', () {
+      final value = 2022.2.ifZero(2);
+      expect(value, isA<double>());
+      expect(value, 2022.2);
+      expect(0.0.ifZero(2022.2), 2022.2);
+    });
+
     test('returns closest double with digits precision', () {
       expect(29.07.roundUp(0), 29);
       expect(0.0155.roundUp(5), 0.0155);
@@ -74,6 +88,15 @@ void main() {
       expect(29.07.isDouble, true);
       expect(2022.isDouble, false);
       expect(20.0.isDouble, false);
+    });
+
+    test('returns value in zero case', () {
+      const num zero = 0;
+      const num number = 2022.2;
+      final value = number.ifZero(2);
+      expect(value, isA<num>());
+      expect(value, 2022.2);
+      expect(zero.ifZero(2022.2), 2022.2);
     });
 
     test('returns actual value', () {
