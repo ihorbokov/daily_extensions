@@ -137,6 +137,13 @@ void main() {
       expect(testEmptyMap.ifEmpty(testMap).toString(), '{2022: Mary}');
     });
 
+    test('creates unmodifiable map', () {
+      final map = testMap.toUnmodifiableMap();
+      expect(map, isA<Map>());
+      expect(() => map[2023] = 'Hello', throwsUnsupportedError);
+      expect(() => map.remove(2022), throwsUnsupportedError);
+    });
+
     test('creates empty modifiable map if current is null', () {
       final map = testNullableMap.orEmpty;
       expect(map, isA<Map>());
