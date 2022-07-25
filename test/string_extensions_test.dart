@@ -44,6 +44,78 @@ void main() {
       expect('001122'.isNumeric, isTrue);
     });
 
+    test('checks if string is vector', () {
+      expect('file.png'.isVector, isFalse);
+      expect('file.svg'.isVector, isTrue);
+    });
+
+    test('checks if string is image', () {
+      expect('file.jpeg'.isImage, isTrue);
+      expect('file.jpg'.isImage, isTrue);
+      expect('file.gif'.isImage, isTrue);
+      expect('file.png'.isImage, isTrue);
+      expect('file.bmp'.isImage, isTrue);
+      expect('file.svg'.isImage, isFalse);
+    });
+
+    test('checks if string is audio', () {
+      expect('file.mp3'.isAudio, isTrue);
+      expect('file.wav'.isAudio, isTrue);
+      expect('file.wma'.isAudio, isTrue);
+      expect('file.amr'.isAudio, isTrue);
+      expect('file.ogg'.isAudio, isTrue);
+      expect('file.mp4'.isAudio, isFalse);
+    });
+
+    test('checks if string is video', () {
+      expect('file.mp4'.isVideo, isTrue);
+      expect('file.avi'.isVideo, isTrue);
+      expect('file.wmv'.isVideo, isTrue);
+      expect('file.rmvb'.isVideo, isTrue);
+      expect('file.mpg'.isVideo, isTrue);
+      expect('file.mpeg'.isVideo, isTrue);
+      expect('file.3gp'.isVideo, isTrue);
+      expect('file.mp3'.isVideo, isFalse);
+    });
+
+    test('checks if string is txt', () {
+      expect('file.txt'.isTxt, isTrue);
+      expect('file.doc'.isTxt, isFalse);
+    });
+
+    test('checks if string is word', () {
+      expect('file.doc'.isDoc, isTrue);
+      expect('file.docx'.isDoc, isTrue);
+      expect('file.txt'.isDoc, isFalse);
+    });
+
+    test('checks if string is excel', () {
+      expect('file.xls'.isExcel, isTrue);
+      expect('file.xlsx'.isExcel, isTrue);
+      expect('file.doc'.isExcel, isFalse);
+    });
+
+    test('checks if string is ppt', () {
+      expect('file.ppt'.isPpt, isTrue);
+      expect('file.pptx'.isPpt, isTrue);
+      expect('file.xlsx'.isPpt, isFalse);
+    });
+
+    test('checks if string is apk', () {
+      expect('file.apk'.isApk, isTrue);
+      expect('file.ppt'.isApk, isFalse);
+    });
+
+    test('checks if string is pdf', () {
+      expect('file.pdf'.isPdf, isTrue);
+      expect('file.apk'.isPdf, isFalse);
+    });
+
+    test('checks if string is html', () {
+      expect('file.html'.isHtml, isTrue);
+      expect('file.pdf'.isHtml, isFalse);
+    });
+
     test('checks if string is url', () {
       expect('http://phimary.com'.isUrl, isTrue);
       expect('http://phimary.com/'.isUrl, isTrue);
@@ -56,6 +128,39 @@ void main() {
       expect('info@phimary.com'.isEmail, isTrue);
       expect('info@phimary'.isEmail, isFalse);
       expect('info@phimary.c'.isEmail, isFalse);
+    });
+
+    test('checks if string is DateTime', () {
+      expect('2022-07-26 19:42:01.012369Z'.isDateTime, isTrue);
+      expect('2022-07-26T22:42:01.015524'.isDateTime, isTrue);
+      expect('2022-07-26'.isDateTime, isFalse);
+    });
+
+    test('checks if string is SSN', () {
+      expect('856-45-6789'.isSsn, isTrue);
+      expect('000-45-6789'.isSsn, isFalse);
+    });
+
+    test('checks if string is Passport No', () {
+      expect('533380006'.isPassport, isTrue);
+      expect('000-45-6789'.isPassport, isFalse);
+    });
+
+    test('checks if string is ISBN', () {
+      expect('978-9-748577-12-8'.isIsbn, isTrue);
+      expect('533380006'.isIsbn, isFalse);
+    });
+
+    test('checks if string is credit or debit card', () {
+      expect('4338569737620319'.isCreditCard, isTrue);
+      expect('978-9-748577-12-8'.isCreditCard, isFalse);
+    });
+
+    test('checks if string is currency', () {
+      expect('10'.isCurrency, isTrue);
+      expect('10 USD'.isCurrency, isTrue);
+      expect('100 EUR'.isCurrency, isTrue);
+      expect('100 A'.isCurrency, isFalse);
     });
 
     test('checks if string is MD5', () {
@@ -105,16 +210,6 @@ void main() {
       expect('#A7BA'.isIPv6, isFalse);
     });
 
-    test('checks if string is middle password', () {
-      expect('qwerty'.isMiddlePassword, isFalse);
-      expect('Qwerty100'.isMiddlePassword, isTrue);
-    });
-
-    test('checks if string is strong password', () {
-      expect('qwerty'.isStrongPassword, isFalse);
-      expect('Qwerty100500!'.isStrongPassword, isTrue);
-    });
-
     test('checks if string is UUID', () {
       expect('7fe14699-0001-0000-0000-1ddeaa51af4a'.isUuid, isTrue);
       expect('123e4567-e89b-12d3-a4561426614174000'.isUuid, isFalse);
@@ -126,6 +221,21 @@ void main() {
       expect('(888) 888-1118'.isPhoneNumber(), isTrue);
       expect('888'.isPhoneNumber(), isFalse);
       expect('(888) 888111222222222'.isPhoneNumber(), isFalse);
+    });
+
+    test('checks if string is weak password', () {
+      expect('qwe'.isWeakPassword(), isFalse);
+      expect('qwerty'.isWeakPassword(), isTrue);
+    });
+
+    test('checks if string is medium password', () {
+      expect('qwerty'.isMediumPassword(), isFalse);
+      expect('Qwerty100'.isMediumPassword(), isTrue);
+    });
+
+    test('checks if string is strong password', () {
+      expect('Qwerty100'.isStrongPassword(), isFalse);
+      expect('Qwerty100500!'.isStrongPassword(), isTrue);
     });
 
     test('returns value in empty case', () {
@@ -141,6 +251,24 @@ void main() {
       expect(value, 'Hello');
       expect(''.ifBlank('World'), 'World');
       expect('   '.ifBlank('World'), 'World');
+    });
+
+    test('returns all digits', () {
+      expect(''.digits, '');
+      expect('hello'.digits, '');
+      expect('+3 (112) 33-44'.digits, '31123344');
+    });
+
+    test('returns all Latin letters', () {
+      expect(''.letters, '');
+      expect('hello'.letters, 'hello');
+      expect('Hello100 World500!'.letters, 'HelloWorld');
+    });
+
+    test('returns all symbols', () {
+      expect(''.symbols, '');
+      expect('hello'.symbols, '');
+      expect('Hello100 @%^& Wo,.rld500!'.symbols, '@%^&,.!');
     });
 
     test('returns array of chars', () {
@@ -205,22 +333,10 @@ void main() {
       expect('Hello100 World500!'.removeLetters(), '100 500!');
     });
 
-    test('removes special symbols', () {
-      expect(''.removeSpecial(), '');
-      expect('hello'.removeSpecial(), 'hello');
-      expect('Hello@ World!'.removeSpecial(), 'Hello World');
-    });
-
-    test('removes all expect of digits', () {
-      expect(''.leaveOnlyDigits(), '');
-      expect('hello'.leaveOnlyDigits(), '');
-      expect('+3 (112) 33-44'.leaveOnlyDigits(), '31123344');
-    });
-
-    test('removes all expect of Latin letters', () {
-      expect(''.leaveOnlyLetters(), '');
-      expect('hello'.leaveOnlyLetters(), 'hello');
-      expect('Hello100 World500!'.leaveOnlyLetters(), 'HelloWorld');
+    test('removes symbols', () {
+      expect(''.removeSymbols(), '');
+      expect('hello'.removeSymbols(), 'hello');
+      expect('Hello@ World!'.removeSymbols(), 'Hello World');
     });
 
     test('checks if has match', () {
@@ -271,6 +387,11 @@ void main() {
       expect(''.toParamCase(), '');
       expect('hello'.toParamCase(), 'hello');
       expect('Hello World'.toParamCase(), 'hello-world');
+    });
+
+    test('converts to country flag', () {
+      expect('UA'.toCountryFlag(), '🇺🇦');
+      expect('US'.toCountryFlag(), '🇺🇸');
     });
 
     test('checks if equal, ignoring upper / lower cases', () {
