@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/phimary/daily_extensions/master/docs/logo.png" height="300" alt="Daily Extensions Package" />
+<img src="https://raw.githubusercontent.com/phimary/daily_extensions/master/assets/logo.png" height="300" alt="Daily Extensions Package" />
 </p>
 
 <p align="center">
