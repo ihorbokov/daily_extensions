@@ -9,6 +9,18 @@ void main() {
       expect('Hello world!'.isBlank, isFalse);
     });
 
+    test('checks if string is int', () {
+      expect('Hello world!'.isInt, isFalse);
+      expect('2022'.isInt, isTrue);
+      expect('-20.22'.isInt, isFalse);
+    });
+
+    test('checks if string is double', () {
+      expect('Hello world!'.isDouble, isFalse);
+      expect('2022'.isDouble, isTrue);
+      expect('-20.22'.isDouble, isTrue);
+    });
+
     test('checks if string is num', () {
       expect('Hello world!'.isNum, isFalse);
       expect('2022'.isNum, isTrue);
@@ -31,6 +43,8 @@ void main() {
       expect('N'.isBool, isTrue);
       expect('0'.isBool, isTrue);
       expect('1'.isBool, isTrue);
+      expect('Online'.isBool, isTrue);
+      expect('offline'.isBool, isTrue);
     });
 
     test('checks if string is alphabetic', () {
@@ -133,7 +147,8 @@ void main() {
     test('checks if string is DateTime', () {
       expect('2022-07-26 19:42:01.012369Z'.isDateTime, isTrue);
       expect('2022-07-26T22:42:01.015524'.isDateTime, isTrue);
-      expect('2022-07-26'.isDateTime, isFalse);
+      expect('2022-07-26'.isDateTime, isTrue);
+      expect('2022-107-261'.isDateTime, isFalse);
     });
 
     test('checks if string is SSN', () {
@@ -268,7 +283,37 @@ void main() {
     test('returns all symbols', () {
       expect(''.symbols, '');
       expect('hello'.symbols, '');
-      expect('Hello100 @%^& Wo,.rld500!'.symbols, '@%^&,.!');
+      expect('Hello100±± @%^& Wo,.rld500!'.symbols, '±±@%^&,.!');
+    });
+
+    test('returns all special symbols', () {
+      expect(''.specialSymbols, '');
+      expect('hello'.specialSymbols, '');
+      expect('Hello100±± @%^& Wo,.rld500!'.specialSymbols, '@%^&,.!');
+    });
+
+    test('checks if string contains digits', () {
+      expect(''.hasDigits, isFalse);
+      expect('hello'.hasDigits, isFalse);
+      expect('Hello100±± @%^& Wo,.rld500!'.hasDigits, isTrue);
+    });
+
+    test('checks if string contains letters', () {
+      expect(''.hasLetters, isFalse);
+      expect('hello'.hasLetters, isTrue);
+      expect('Hello100±± @%^& Wo,.rld500!'.hasLetters, isTrue);
+    });
+
+    test('checks if string contains symbols', () {
+      expect(''.hasSymbols, isFalse);
+      expect('hello'.hasSymbols, isFalse);
+      expect('Hello100±± @%^& Wo,.rld500!'.hasSymbols, isTrue);
+    });
+
+    test('checks if string contains special symbols', () {
+      expect(''.hasSpecialSymbols, isFalse);
+      expect('hello'.hasSpecialSymbols, isFalse);
+      expect('Hello100±± @%^& Wo,.rld500!'.hasSpecialSymbols, isTrue);
     });
 
     test('returns array of chars', () {
@@ -281,7 +326,7 @@ void main() {
       expect('Hello world!'.reversed, '!dlrow olleH');
     });
 
-    test('Casts to bool', () {
+    test('converts to bool', () {
       expect('true'.asBool(), isTrue);
       expect('false'.asBool(), isFalse);
       expect('TRUE'.asBool(), isTrue);
@@ -294,6 +339,8 @@ void main() {
       expect('N'.asBool(), isFalse);
       expect('1'.asBool(), isTrue);
       expect('0'.asBool(), isFalse);
+      expect('online'.asBool(), isTrue);
+      expect('Offline'.asBool(), isFalse);
       expect('Hello world!'.asBool(), isFalse);
     });
 
@@ -336,7 +383,13 @@ void main() {
     test('removes symbols', () {
       expect(''.removeSymbols(), '');
       expect('hello'.removeSymbols(), 'hello');
-      expect('Hello@ World!'.removeSymbols(), 'Hello World');
+      expect('Hello@±± World!'.removeSymbols(), 'Hello World');
+    });
+
+    test('removes special symbols', () {
+      expect(''.removeSpecialSymbols(), '');
+      expect('hello'.removeSpecialSymbols(), 'hello');
+      expect('Hello@±± World!'.removeSpecialSymbols(), 'Hello±± World');
     });
 
     test('checks if has match', () {
