@@ -38,6 +38,24 @@ extension IntX on int {
     if (isNegative) throw ArgumentError('$this is negative.');
     return '$this'.padLeft(length, '0');
   }
+
+  /// Converts this [int] to [Duration] in days.
+  Duration toDays() => Duration(days: this);
+
+  /// Converts this [int] to [Duration] in hours.
+  Duration toHours() => Duration(hours: this);
+
+  /// Converts this [int] to [Duration] in minutes.
+  Duration toMinutes() => Duration(minutes: this);
+
+  /// Converts this [int] to [Duration] in seconds.
+  Duration toSeconds() => Duration(seconds: this);
+
+  /// Converts this [int] to [Duration] in milliseconds.
+  Duration toMilliseconds() => Duration(milliseconds: this);
+
+  /// Converts this [int] to [Duration] in microseconds.
+  Duration toMicroseconds() => Duration(microseconds: this);
 }
 
 /// Extensions for [double].

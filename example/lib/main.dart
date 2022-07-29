@@ -44,6 +44,10 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
+            'What is today\'s date? - ${DateTimeX.today.toDate()}.',
+            textAlign: TextAlign.center,
+          ),
+          Text(
             'What is the actual value of $_demoNumber? - ${_demoNumber.toActual()}.',
             textAlign: TextAlign.center,
           ),

@@ -108,6 +108,61 @@ void main() {
       expect(list.toString(), '[1, 4, 9, 16, 25]');
     });
 
+    test('maps iterable to list with predicate', () {
+      final list = testIterable.mapToListWhere(
+        (element) => element * element,
+        (element) => element % 2 == 0,
+        growable: true,
+      );
+      expect(list, isA<List>());
+      expect(list.toString(), '[4, 16]');
+      expect((list..add(25)).toString(), '[4, 16, 25]');
+
+      final fixedList = testIterable.mapToListWhere(
+        (element) => element * element,
+        (element) => element % 2 == 0,
+      );
+      expect(fixedList, isA<List>());
+      expect(fixedList.toString(), '[4, 16]');
+      expect(() => fixedList.add(25), throwsUnsupportedError);
+    });
+
+    test('maps iterable to set', () {
+      final set = testIterable.mapToSet(
+        (element) => element * element,
+        modifiable: true,
+      );
+      expect(set, isA<Set>());
+      expect(set.toString(), '{1, 4, 9, 16, 25}');
+      expect((set..add(36)).toString(), '{1, 4, 9, 16, 25, 36}');
+
+      final unmodifiableSet = testIterable.mapToSet(
+        (element) => element * element,
+      );
+      expect(unmodifiableSet, isA<Set>());
+      expect(unmodifiableSet.toString(), '{1, 4, 9, 16, 25}');
+      expect(() => unmodifiableSet.add(36), throwsUnsupportedError);
+    });
+
+    test('maps iterable to set with predicate', () {
+      final set = testIterable.mapToSetWhere(
+        (element) => element * element,
+        (element) => element % 2 == 0,
+        modifiable: true,
+      );
+      expect(set, isA<Set>());
+      expect(set.toString(), '{4, 16}');
+      expect((set..add(25)).toString(), '{4, 16, 25}');
+
+      final unmodifiableSet = testIterable.mapToSetWhere(
+        (element) => element * element,
+        (element) => element % 2 == 0,
+      );
+      expect(unmodifiableSet, isA<Set>());
+      expect(unmodifiableSet.toString(), '{4, 16}');
+      expect(() => unmodifiableSet.add(25), throwsUnsupportedError);
+    });
+
     test('counts of elements matching the predicate', () {
       expect(testIterable.count((element) => element > 2), 3);
     });

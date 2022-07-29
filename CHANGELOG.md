@@ -1,3 +1,7 @@
+# 1.0.2
+
+- Added DateTime and `mapToListWhere`, `mapToSet`, `mapToSetWhere` extensions.
+
 # 1.0.1
 
 - Updated description and added an example.

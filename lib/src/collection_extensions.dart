@@ -47,12 +47,54 @@ extension IterableX<T> on Iterable<T> {
   /// Creates an unmodifiable [Set] containing the elements of this [Iterable].
   Set<T> toUnmodifiableSet() => Set.unmodifiable(this);
 
-  /// Creates a [List] based on the current elements of this [Iterable]
+  /// Creates a [List] with all elements of this [Iterable]
   /// modified by [toElement].
   ///
   /// The [List] is fixed-length if [growable] is false.
   List<R> mapToList<R>(R Function(T e) toElement, {bool growable = false}) =>
       map<R>(toElement).toList(growable: growable);
+
+  /// Creates a [List] with all elements of this [Iterable] that satisfy
+  /// the predicate [test] and modified by [toElement].
+  ///
+  /// The [List] is fixed-length if [growable] is false.
+  List<R> mapToListWhere<R>(
+    R Function(T e) toElement,
+    bool Function(T e) test, {
+    bool growable = false,
+  }) {
+    late final list = <R>[];
+    for (final element in this) {
+      if (test(element)) list.add(toElement(element));
+    }
+    return growable ? list : list.toFixedList();
+  }
+
+  /// Creates a [Set] with all elements of this [Iterable]
+  /// modified by [toElement].
+  ///
+  /// The [Set] is modifiable if [modifiable] is true.
+  Set<R> mapToSet<R>(R Function(T e) toElement, {bool modifiable = false}) {
+    return modifiable
+        ? map<R>(toElement).toSet()
+        : map<R>(toElement).toUnmodifiableSet();
+  }
+
+  /// Creates a [Set] with all elements of this [Iterable] that satisfy
+  /// the predicate [test] and modified by [toElement].
+  ///
+  /// The [Set] is modifiable if [modifiable] is true.
+  Set<R> mapToSetWhere<R>(
+    R Function(T e) toElement,
+    bool Function(T e) test, {
+    bool modifiable = false,
+  }) {
+    late final set = <R>{};
+    for (final element in this) {
+      if (test(element)) set.add(toElement(element));
+    }
+    return modifiable ? set : set.toUnmodifiableSet();
+  }
 
   /// Returns the number of elements matching the given [test] predicate.
   int count(bool Function(T element) test) => where(test).length;

@@ -35,6 +35,36 @@ void main() {
       expect(12345.toIndex(3), '12345');
       expect(() => (-2).toIndex(3), throwsArgumentError);
     });
+
+    test('converts to duration in days', () {
+      expect(1.toDays(), const Duration(days: 1));
+      expect(7.toDays(), const Duration(days: 7));
+    });
+
+    test('converts to duration in hours', () {
+      expect(1.toHours(), const Duration(hours: 1));
+      expect(7.toHours(), const Duration(hours: 7));
+    });
+
+    test('converts to duration in minutes', () {
+      expect(1.toMinutes(), const Duration(minutes: 1));
+      expect(7.toMinutes(), const Duration(minutes: 7));
+    });
+
+    test('converts to duration in seconds', () {
+      expect(1.toSeconds(), const Duration(seconds: 1));
+      expect(7.toSeconds(), const Duration(seconds: 7));
+    });
+
+    test('converts to duration in milliseconds', () {
+      expect(1.toMilliseconds(), const Duration(milliseconds: 1));
+      expect(7.toMilliseconds(), const Duration(milliseconds: 7));
+    });
+
+    test('converts to duration in microseconds', () {
+      expect(1.toMicroseconds(), const Duration(microseconds: 1));
+      expect(7.toMicroseconds(), const Duration(microseconds: 7));
+    });
   });
 
   group('Double Extensions', () {
