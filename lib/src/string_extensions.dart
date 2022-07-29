@@ -4,12 +4,30 @@ extension StringX on String {
   /// of whitespace characters.
   bool get isBlank => trim().isEmpty;
 
+  /// Whether this [String] is [int].
+  bool get isInt => int.tryParse(this) != null;
+
+  /// Whether this [String] is [double].
+  bool get isDouble => double.tryParse(this) != null;
+
   /// Whether this [String] is [num].
   bool get isNum => num.tryParse(this) != null;
 
   /// Whether this [String] is [bool].
-  bool get isBool => equalsAny(
-      ['true', 'false', 'yes', 'no', 'y', 'n', 'on', 'off', '1', '0']);
+  bool get isBool => equalsAny(const [
+        'true',
+        'false',
+        'yes',
+        'no',
+        'y',
+        'n',
+        'on',
+        'off',
+        'online',
+        'offline',
+        '1',
+        '0',
+      ]);
 
   /// Whether this [String] consists only Latin letters.
   bool get isAlphabetic => hasMatch(r'^[a-zA-Z]+$');
@@ -59,11 +77,10 @@ extension StringX on String {
   bool get isEmail => hasMatch(
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 
-  /// Whether this [String] is DateTime (UTC or ISO-8601).
-  bool get isDateTime =>
-      hasMatch(r'^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2}.\d{3,}Z?$');
+  /// Whether this [String] is DateTime.
+  bool get isDateTime => DateTime.tryParse(this) != null;
 
-  /// Whether this [String] is SSN.
+  /// Whether this [String] is Social Security number.
   bool get isSsn => hasMatch(
       r'^(?!0{3}|6{3}|9[0-9]{2})[0-9]{3}-?(?!0{2})[0-9]{2}-?(?!0{4})[0-9]{4}$');
 
@@ -161,14 +178,30 @@ extension StringX on String {
   /// Returns symbols of this [String].
   String get symbols => remove(RegExp(r'[a-zA-Z0-9 ]'));
 
+  /// Returns special symbols of this [String].
+  String get specialSymbols =>
+      remove(RegExp(r'[^/!@#$%^\-&*()+",.?":{}|<>~_-`]'));
+
+  /// Returns true if this [String] contains digits.
+  bool get hasDigits => digits.isNotEmpty;
+
+  /// Returns true if this [String] contains letters.
+  bool get hasLetters => letters.isNotEmpty;
+
+  /// Returns true if this [String] contains symbols.
+  bool get hasSymbols => symbols.isNotEmpty;
+
+  /// Returns true if this [String] contains special symbols.
+  bool get hasSpecialSymbols => specialSymbols.isNotEmpty;
+
   /// Returns char's array of this [String].
   List<String> get charArray => isBlank ? [] : split('');
 
   /// Returns reversed [String].
   String get reversed => charArray.reversed.join();
 
-  /// Casts this [String] to [bool].
-  bool asBool() => equalsAny(['true', 'yes', 'y', 'on', '1']);
+  /// Converts this [String] to [bool].
+  bool asBool() => equalsAny(const ['true', 'yes', 'y', 'on', 'online', '1']);
 
   /// Capitalize the first letter of this [String].
   String capitalizeFirst() {
@@ -196,6 +229,10 @@ extension StringX on String {
 
   /// Removes all symbols from this [String].
   String removeSymbols() => remove(RegExp(r'([^a-zA-Z0-9 ]+)'));
+
+  /// Removes all special symbols from this [String].
+  String removeSpecialSymbols() =>
+      remove(RegExp(r'[/!@#$%^\-&*()+",.?":{}|<>~_-`]'));
 
   /// Whether the regular expression has a match in this [String].
   bool hasMatch(String source) => RegExp(source).hasMatch(this);
