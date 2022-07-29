@@ -47,53 +47,53 @@ extension IterableX<T> on Iterable<T> {
   /// Creates an unmodifiable [Set] containing the elements of this [Iterable].
   Set<T> toUnmodifiableSet() => Set.unmodifiable(this);
 
-  /// Creates a [List] based on the current elements of this [Iterable]
+  /// Creates a [List] with all elements of this [Iterable]
   /// modified by [toElement].
   ///
   /// The [List] is fixed-length if [growable] is false.
   List<R> mapToList<R>(R Function(T e) toElement, {bool growable = false}) =>
       map<R>(toElement).toList(growable: growable);
 
-  /// Returns a [List] modified by [toElement], with all elements that satisfy
-  /// the predicate [where].
+  /// Creates a [List] with all elements of this [Iterable] that satisfy
+  /// the predicate [test] and modified by [toElement].
   ///
   /// The [List] is fixed-length if [growable] is false.
   List<R> mapToListWhere<R>(
-    bool Function(T t) where,
-    R Function(T t) toElement, {
+    R Function(T e) toElement,
+    bool Function(T e) test, {
     bool growable = false,
   }) {
     late final list = <R>[];
-    for (final value in this) {
-      if (where(value)) list.add(toElement(value));
+    for (final element in this) {
+      if (test(element)) list.add(toElement(element));
     }
-    return growable ? list : list.toList(growable: false);
+    return growable ? list : list.toFixedList();
   }
 
-  /// Creates a [Set] based on the current elements of this [Iterable]
+  /// Creates a [Set] with all elements of this [Iterable]
   /// modified by [toElement].
   ///
-  /// The [Set] is unmodifiable if [unmodifiable] is true.
-  Set<R> mapToSet<R>(R Function(T t) toElement, {bool unmodifiable = true}) {
-    return unmodifiable
-        ? map<R>(toElement).toUnmodifiableSet()
-        : map<R>(toElement).toSet();
+  /// The [Set] is modifiable if [modifiable] is true.
+  Set<R> mapToSet<R>(R Function(T e) toElement, {bool modifiable = false}) {
+    return modifiable
+        ? map<R>(toElement).toSet()
+        : map<R>(toElement).toUnmodifiableSet();
   }
 
-  /// Returns a [Set] modified by [toElement], with all elements that satisfy
-  /// the predicate [where].
+  /// Creates a [Set] with all elements of this [Iterable] that satisfy
+  /// the predicate [test] and modified by [toElement].
   ///
-  /// The [Set] is unmodifiable if [unmodifiable] is true.
+  /// The [Set] is modifiable if [modifiable] is true.
   Set<R> mapToSetWhere<R>(
-    bool Function(T t) where,
-    R Function(T t) toElement, {
-    bool unmodifiable = true,
+    R Function(T e) toElement,
+    bool Function(T e) test, {
+    bool modifiable = false,
   }) {
     late final set = <R>{};
-    for (final value in this) {
-      if (where(value)) set.add(toElement(value));
+    for (final element in this) {
+      if (test(element)) set.add(toElement(element));
     }
-    return unmodifiable ? set.toUnmodifiableSet() : set;
+    return modifiable ? set : set.toUnmodifiableSet();
   }
 
   /// Returns the number of elements matching the given [test] predicate.

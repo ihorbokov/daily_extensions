@@ -110,8 +110,8 @@ void main() {
 
     test('maps iterable to list with predicate', () {
       final list = testIterable.mapToListWhere(
-        (element) => element % 2 == 0,
         (element) => element * element,
+        (element) => element % 2 == 0,
       );
       expect(list, isA<List>());
       expect(list.toString(), '[4, 16]');
@@ -125,8 +125,8 @@ void main() {
 
     test('maps iterable to set with predicate', () {
       final set = testIterable.mapToSetWhere(
-        (element) => element % 2 == 0,
         (element) => element * element,
+        (element) => element % 2 == 0,
       );
       expect(set, isA<Set>());
       expect(set.toString(), '{4, 16}');
