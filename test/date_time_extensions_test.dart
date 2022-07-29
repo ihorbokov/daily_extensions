@@ -476,6 +476,20 @@ void main() {
         ).toString(),
         DateTime(2022, 7, 27).weekDays.toString(),
       );
+      expect(
+        () => DateTimeX.daysBetween(
+          DateTime(2022, 7, 25),
+          DateTime(2022, 7, 25),
+        ),
+        throwsArgumentError,
+      );
+      expect(
+        () => DateTimeX.daysBetween(
+          DateTime(2022, 7, 30),
+          DateTime(2022, 7, 25),
+        ),
+        throwsArgumentError,
+      );
     });
 
     test('returns first day of week', () {
