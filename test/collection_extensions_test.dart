@@ -108,6 +108,30 @@ void main() {
       expect(list.toString(), '[1, 4, 9, 16, 25]');
     });
 
+    test('maps iterable to list with predicate', () {
+      final list = testIterable.mapToListWhere(
+        (element) => element % 2 == 0,
+        (element) => element * element,
+      );
+      expect(list, isA<List>());
+      expect(list.toString(), '[4, 16]');
+    });
+
+    test('maps iterable to set', () {
+      final set = testIterable.mapToSet((element) => element * element);
+      expect(set, isA<Set>());
+      expect(set.toString(), '{1, 4, 9, 16, 25}');
+    });
+
+    test('maps iterable to set with predicate', () {
+      final set = testIterable.mapToSetWhere(
+        (element) => element % 2 == 0,
+        (element) => element * element,
+      );
+      expect(set, isA<Set>());
+      expect(set.toString(), '{4, 16}');
+    });
+
     test('counts of elements matching the predicate', () {
       expect(testIterable.count((element) => element > 2), 3);
     });
