@@ -54,6 +54,48 @@ extension IterableX<T> on Iterable<T> {
   List<R> mapToList<R>(R Function(T e) toElement, {bool growable = false}) =>
       map<R>(toElement).toList(growable: growable);
 
+  /// Returns a [List] modified by [toElement], with all elements that satisfy
+  /// the predicate [where].
+  ///
+  /// The [List] is fixed-length if [growable] is false.
+  List<R> mapToListWhere<R>(
+    bool Function(T t) where,
+    R Function(T t) toElement, {
+    bool growable = false,
+  }) {
+    late final list = <R>[];
+    for (final value in this) {
+      if (where(value)) list.add(toElement(value));
+    }
+    return growable ? list : list.toList(growable: false);
+  }
+
+  /// Creates a [Set] based on the current elements of this [Iterable]
+  /// modified by [toElement].
+  ///
+  /// The [Set] is unmodifiable if [unmodifiable] is true.
+  Set<R> mapToSet<R>(R Function(T t) toElement, {bool unmodifiable = true}) {
+    return unmodifiable
+        ? map<R>(toElement).toUnmodifiableSet()
+        : map<R>(toElement).toSet();
+  }
+
+  /// Returns a [Set] modified by [toElement], with all elements that satisfy
+  /// the predicate [where].
+  ///
+  /// The [Set] is unmodifiable if [unmodifiable] is true.
+  Set<R> mapToSetWhere<R>(
+    bool Function(T t) where,
+    R Function(T t) toElement, {
+    bool unmodifiable = true,
+  }) {
+    late final set = <R>{};
+    for (final value in this) {
+      if (where(value)) set.add(toElement(value));
+    }
+    return unmodifiable ? set.toUnmodifiableSet() : set;
+  }
+
   /// Returns the number of elements matching the given [test] predicate.
   int count(bool Function(T element) test) => where(test).length;
 }
