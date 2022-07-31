@@ -185,122 +185,165 @@ void main() {
 
     test('checks if dates are equal up to year', () {
       expect(
-        DateTime(2022, 12, 10).isAtSameYearAs(DateTime(2022, 1, 1)),
+        DateTime(2022, 12, 10).isAtSameYearAs(
+          DateTime(2022, 1, 1),
+        ),
         isTrue,
       );
       expect(
-        DateTime(2022, 12, 1).isAtSameYearAs(DateTime(2021, 1, 1)),
+        DateTime(2022, 12, 1).isAtSameYearAs(
+          DateTime(2021, 1, 1),
+        ),
         isFalse,
       );
     });
 
     test('checks if dates are equal up to month', () {
       expect(
-        DateTime(2022, 12, 1).isAtSameMonthAs(DateTime(2022, 12, 15)),
+        DateTime(2022, 12, 1).isAtSameMonthAs(
+          DateTime(2022, 12, 15),
+        ),
         isTrue,
       );
       expect(
-        DateTime(2022, 12, 1).isAtSameMonthAs(DateTime(2022, 11, 1)),
+        DateTime(2022, 12, 1).isAtSameMonthAs(
+          DateTime(2022, 11, 1),
+        ),
         isFalse,
       );
     });
 
     test('checks if dates are equal up to week', () {
       expect(
-        DateTime(2022, 7, 26).isAtSameWeekAs(DateTime(2022, 7, 29)),
+        DateTime(2022, 7, 26).isAtSameWeekAs(
+          DateTime(2022, 7, 29),
+        ),
         isTrue,
       );
       expect(
-        DateTime(2022, 7, 20).isAtSameWeekAs(DateTime(2022, 7, 29)),
+        DateTime(2022, 7, 20).isAtSameWeekAs(
+          DateTime(2022, 7, 29),
+        ),
         isFalse,
       );
     });
 
     test('checks if dates are equal up to day', () {
       expect(
-        DateTime(2022, 7, 26).isAtSameDayAs(DateTime(2022, 7, 26)),
+        DateTime(2022, 7, 26).isAtSameDayAs(
+          DateTime(2022, 7, 26),
+        ),
         isTrue,
       );
       expect(
-        DateTime(2022, 7, 26).isAtSameDayAs(DateTime(2022, 7, 27)),
+        DateTime(2022, 7, 26).isAtSameDayAs(
+          DateTime(2022, 7, 27),
+        ),
         isFalse,
       );
     });
 
     test('checks if dates are equal up to hour', () {
       expect(
-        DateTime(2022, 7, 26, 1).isAtSameHourAs(DateTime(2022, 7, 26, 1)),
+        DateTime(2022, 7, 26, 1).isAtSameHourAs(
+          DateTime(2022, 7, 26, 1),
+        ),
         isTrue,
       );
       expect(
-        DateTime(2022, 7, 26, 1).isAtSameHourAs(DateTime(2022, 7, 26, 2)),
+        DateTime(2022, 7, 26, 1).isAtSameHourAs(
+          DateTime(2022, 7, 26, 2),
+        ),
         isFalse,
       );
     });
 
     test('checks if dates are equal up to minute', () {
       expect(
-        DateTime(2022, 7, 26, 1, 1)
-            .isAtSameMinuteAs(DateTime(2022, 7, 26, 1, 1)),
+        DateTime(2022, 7, 26, 1, 1).isAtSameMinuteAs(
+          DateTime(2022, 7, 26, 1, 1),
+        ),
         isTrue,
       );
       expect(
-        DateTime(2022, 7, 26, 1, 1)
-            .isAtSameMinuteAs(DateTime(2022, 7, 26, 1, 2)),
+        DateTime(2022, 7, 26, 1, 1).isAtSameMinuteAs(
+          DateTime(2022, 7, 26, 1, 2),
+        ),
         isFalse,
       );
     });
 
     test('checks if dates are equal up to second', () {
       expect(
-        DateTime(2022, 7, 26, 1, 1, 1)
-            .isAtSameSecondAs(DateTime(2022, 7, 26, 1, 1, 1)),
+        DateTime(2022, 7, 26, 1, 1, 1).isAtSameSecondAs(
+          DateTime(2022, 7, 26, 1, 1, 1),
+        ),
         isTrue,
       );
       expect(
-        DateTime(2022, 7, 26, 1, 1, 1)
-            .isAtSameSecondAs(DateTime(2022, 7, 26, 1, 1, 2)),
+        DateTime(2022, 7, 26, 1, 1, 1).isAtSameSecondAs(
+          DateTime(2022, 7, 26, 1, 1, 2),
+        ),
         isFalse,
       );
     });
 
     test('checks if dates are equal up to millisecond', () {
       expect(
-        DateTime(2022, 7, 26, 1, 1, 1, 1)
-            .isAtSameMillisecondAs(DateTime(2022, 7, 26, 1, 1, 1, 1)),
+        DateTime(2022, 7, 26, 1, 1, 1, 1).isAtSameMillisecondAs(
+          DateTime(2022, 7, 26, 1, 1, 1, 1),
+        ),
         isTrue,
       );
       expect(
-        DateTime(2022, 7, 26, 1, 1, 1, 1)
-            .isAtSameMillisecondAs(DateTime(2022, 7, 26, 1, 1, 1, 2)),
+        DateTime(2022, 7, 26, 1, 1, 1, 1).isAtSameMillisecondAs(
+          DateTime(2022, 7, 26, 1, 1, 1, 2),
+        ),
         isFalse,
       );
     });
 
     test('checks if dates are equal up to microsecond', () {
       expect(
-        DateTime(2022, 7, 26, 1, 1, 1, 1, 1)
-            .isAtSameMicrosecondAs(DateTime(2022, 7, 26, 1, 1, 1, 1, 1)),
+        DateTime(2022, 7, 26, 1, 1, 1, 1, 1).isAtSameMicrosecondAs(
+          DateTime(2022, 7, 26, 1, 1, 1, 1, 1),
+        ),
         isTrue,
       );
       expect(
-        DateTime(2022, 7, 26, 1, 1, 1, 1, 1)
-            .isAtSameMicrosecondAs(DateTime(2022, 7, 26, 1, 1, 1, 1, 2)),
+        DateTime(2022, 7, 26, 1, 1, 1, 1, 1).isAtSameMicrosecondAs(
+          DateTime(2022, 7, 26, 1, 1, 1, 1, 2),
+        ),
         isFalse,
       );
     });
 
     test('checks if date is in range of dates', () {
       expect(
-        DateTime(2022, 1, 1)
-            .isBetween(DateTime(2021, 12, 25), DateTime(2022, 1, 15)),
+        DateTime(2022, 1, 1).isBetween(
+          DateTime(2021, 12, 25),
+          DateTime(2022, 1, 15),
+        ),
         isTrue,
       );
       expect(
-        DateTime(2022, 1, 1)
-            .isBetween(DateTime(2022, 1, 2), DateTime(2022, 1, 10)),
+        DateTime(2022, 1, 1).isBetween(
+          DateTime(2022, 1, 2),
+          DateTime(2022, 1, 10),
+        ),
         isFalse,
       );
+    });
+
+    test('returns age', () {
+      expect(DateTimeX.today.age.toString(), '[0, 0, 0, 0]');
+      expect(DateTime(2013, 1, 1).age.length, 4);
+      expect(() => DateTimeX.today.nextYear.age, throwsArgumentError);
+    });
+
+    test('returns day of the year', () {
+      expect(DateTime(2022, 1, 1).yearDay, 1);
+      expect(DateTime(2022, 12, 30).yearDay, 364);
     });
 
     test('returns number of days in month of date', () {
@@ -308,10 +351,15 @@ void main() {
       expect(DateTime(2022, 7, 1).monthLength, 31);
     });
 
+    test('returns number of days in year of date', () {
+      expect(DateTime(2020, 6, 1).yearLength, 366);
+      expect(DateTime(2022, 7, 1).yearLength, 365);
+    });
+
     test('returns week days of date', () {
       expect(
         DateTime(2022, 7, 27).weekDays.toString(),
-        DateTimeX.daysBetween(
+        DateTimeX.getDaysRange(
           DateTime(2022, 7, 25),
           DateTime(2022, 7, 31),
         ).toString(),
@@ -321,7 +369,7 @@ void main() {
     test('returns month days of date', () {
       expect(
         DateTime(2022, 7, 27).monthDays.toString(),
-        DateTimeX.daysBetween(
+        DateTimeX.getDaysRange(
           DateTime(2022, 7, 1),
           DateTime(2022, 7, 31),
         ).toString(),
@@ -331,7 +379,7 @@ void main() {
     test('returns year days of date', () {
       expect(
         DateTime(2022, 7, 27).yearDays.toString(),
-        DateTimeX.daysBetween(
+        DateTimeX.getDaysRange(
           DateTime(2022, 1, 1),
           DateTime(2022, 12, 31),
         ).toString(),
@@ -443,6 +491,156 @@ void main() {
       );
     });
 
+    test('returns time until date', () {
+      expect(
+        DateTimeX.today.timeUntil(DateTimeX.today.nextYear).toString(),
+        '[1, 0, 0, 0]',
+      );
+      expect(
+        DateTime(2013, 3, 1).timeUntil(DateTime(2015, 1, 1)).toString(),
+        '[1, 10, 0, 0]',
+      );
+      expect(
+        () => DateTime(2015, 3, 1).timeUntil(DateTime(2013, 1, 1)),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns years until date', () {
+      expect(
+        DateTimeX.today.yearsUntil(
+          DateTimeX.today.nextYear,
+        ),
+        1,
+      );
+      expect(
+        DateTime(2013, 3, 1).yearsUntil(
+          DateTime(2016, 1, 1),
+        ),
+        2,
+      );
+      expect(
+        () => DateTime(2015, 3, 1).yearsUntil(DateTime(2013, 1, 1)),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns months until date', () {
+      expect(
+        DateTimeX.today.monthsUntil(
+          DateTimeX.today.nextMonth,
+        ),
+        1,
+      );
+      expect(
+        DateTime(2013, 3, 1).monthsUntil(
+          DateTime(2016, 1, 1),
+        ),
+        34,
+      );
+      expect(
+        () => DateTime(2015, 3, 1).monthsUntil(DateTime(2013, 1, 1)),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns weeks until date', () {
+      expect(
+        DateTimeX.today.weeksUntil(
+          DateTimeX.today.nextMonth,
+        ),
+        4,
+      );
+      expect(
+        DateTime(2013, 3, 1).weeksUntil(
+          DateTime(2013, 3, 18),
+        ),
+        2,
+      );
+      expect(
+        () => DateTime(2015, 3, 1).weeksUntil(DateTime(2013, 1, 1)),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns days until date', () {
+      expect(
+        DateTime(2013, 3, 1).daysUntil(
+          DateTime(2013, 3, 18),
+        ),
+        17,
+      );
+      expect(
+        () => DateTime(2015, 3, 1).daysUntil(DateTime(2013, 1, 1)),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns hours until date', () {
+      expect(
+        DateTime(2013, 3, 1, 1).hoursUntil(
+          DateTime(2013, 3, 1, 12),
+        ),
+        11,
+      );
+      expect(
+        () => DateTime(2015, 3, 1).hoursUntil(DateTime(2013, 1, 1)),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns minutes until date', () {
+      expect(
+        DateTime(2013, 3, 1, 1, 1).minutesUntil(
+          DateTime(2013, 3, 1, 1, 12),
+        ),
+        11,
+      );
+      expect(
+        () => DateTime(2015, 3, 1).minutesUntil(DateTime(2013, 1, 1)),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns seconds until date', () {
+      expect(
+        DateTime(2013, 3, 1, 1, 1, 1).secondsUntil(
+          DateTime(2013, 3, 1, 1, 1, 12),
+        ),
+        11,
+      );
+      expect(
+        () => DateTime(2015, 3, 1).secondsUntil(DateTime(2013, 1, 1)),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns milliseconds until date', () {
+      expect(
+        DateTime(2013, 3, 1, 1, 1, 1, 1).millisecondsUntil(
+          DateTime(2013, 3, 1, 1, 1, 1, 12),
+        ),
+        11,
+      );
+      expect(
+        () => DateTime(2015, 3, 1).millisecondsUntil(DateTime(2013, 1, 1)),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns microseconds until date', () {
+      expect(
+        DateTime(2013, 3, 1, 1, 1, 1, 1, 1).microsecondsUntil(
+          DateTime(2013, 3, 1, 1, 1, 1, 1, 12),
+        ),
+        11,
+      );
+      expect(
+        () => DateTime(2015, 3, 1).microsecondsUntil(DateTime(2013, 1, 1)),
+        throwsArgumentError,
+      );
+    });
+
     test('returns only date', () {
       expect(
         DateTime(2022, 7, 27, 1, 1, 1, 1, 1).toDate(),
@@ -463,28 +661,33 @@ void main() {
     });
 
     test('returns the number of days in month', () {
-      expect(DateTimeX.daysIn(2020, 2), 29);
-      expect(DateTimeX.daysIn(2021, 2), 28);
-      expect(DateTimeX.daysIn(2021, 12), 31);
+      expect(DateTimeX.getDaysPerMonth(2020, 2), 29);
+      expect(DateTimeX.getDaysPerMonth(2021, 2), 28);
+      expect(DateTimeX.getDaysPerMonth(2021, 12), 31);
+    });
+
+    test('returns the number of days in year', () {
+      expect(DateTimeX.getDaysPerYear(2020), 366);
+      expect(DateTimeX.getDaysPerYear(2021), 365);
     });
 
     test('returns range of days', () {
       expect(
-        DateTimeX.daysBetween(
+        DateTimeX.getDaysRange(
           DateTime(2022, 7, 25),
           DateTime(2022, 7, 31),
         ).toString(),
         DateTime(2022, 7, 27).weekDays.toString(),
       );
       expect(
-        () => DateTimeX.daysBetween(
+        () => DateTimeX.getDaysRange(
           DateTime(2022, 7, 25),
           DateTime(2022, 7, 25),
         ),
         throwsArgumentError,
       );
       expect(
-        () => DateTimeX.daysBetween(
+        () => DateTimeX.getDaysRange(
           DateTime(2022, 7, 30),
           DateTime(2022, 7, 25),
         ),
@@ -531,6 +734,183 @@ void main() {
       expect(
         DateTimeX.getLastYearDay(2022),
         DateTime(2022, 12, 31),
+      );
+    });
+
+    test('returns time between dates', () {
+      expect(
+        DateTimeX.getTimeBetween(
+          DateTime(2013, 3, 1),
+          DateTime(2015, 1, 1),
+        ).toString(),
+        '[1, 10, 0, 0]',
+      );
+      expect(
+        DateTimeX.getTimeBetween(
+          DateTime(2013, 7, 29),
+          DateTime(2014, 7, 15),
+        ).toString(),
+        '[0, 11, 2, 3]',
+      );
+      expect(
+        () => DateTimeX.getTimeBetween(
+          DateTime(2015, 3, 1),
+          DateTime(2013, 1, 1),
+        ),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns years between dates', () {
+      expect(
+        DateTimeX.getYearsBetween(
+          DateTime(2013, 3, 1),
+          DateTime(2016, 1, 1),
+        ),
+        2,
+      );
+      expect(
+        () => DateTimeX.getYearsBetween(
+          DateTime(2015, 3, 1),
+          DateTime(2013, 1, 1),
+        ),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns months between dates', () {
+      expect(
+        DateTimeX.getMonthsBetween(
+          DateTime(2013, 3, 1),
+          DateTime(2016, 1, 1),
+        ),
+        34,
+      );
+      expect(
+        () => DateTimeX.getMonthsBetween(
+          DateTime(2015, 3, 1),
+          DateTime(2013, 1, 1),
+        ),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns weeks between dates', () {
+      expect(
+        DateTimeX.getWeeksBetween(
+          DateTime(2013, 3, 1),
+          DateTime(2013, 3, 18),
+        ),
+        2,
+      );
+      expect(
+        () => DateTimeX.getWeeksBetween(
+          DateTime(2015, 3, 1),
+          DateTime(2013, 1, 1),
+        ),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns days between dates', () {
+      expect(
+        DateTimeX.getDaysBetween(
+          DateTime(2013, 3, 1),
+          DateTime(2013, 3, 18),
+        ),
+        17,
+      );
+      expect(
+        () => DateTimeX.getWeeksBetween(
+          DateTime(2015, 3, 1),
+          DateTime(2013, 1, 1),
+        ),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns hours between dates', () {
+      expect(
+        DateTimeX.getHoursBetween(
+          DateTime(2013, 3, 1, 1),
+          DateTime(2013, 3, 1, 12),
+        ),
+        11,
+      );
+      expect(
+        () => DateTimeX.getHoursBetween(
+          DateTime(2015, 3, 1),
+          DateTime(2013, 1, 1),
+        ),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns minutes between dates', () {
+      expect(
+        DateTimeX.getMinutesBetween(
+          DateTime(2013, 3, 1, 1, 1),
+          DateTime(2013, 3, 1, 1, 12),
+        ),
+        11,
+      );
+      expect(
+        () => DateTimeX.getMinutesBetween(
+          DateTime(2015, 3, 1),
+          DateTime(2013, 1, 1),
+        ),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns seconds between dates', () {
+      expect(
+        DateTimeX.getSecondsBetween(
+          DateTime(2013, 3, 1, 1, 1, 1),
+          DateTime(2013, 3, 1, 1, 1, 12),
+        ),
+        11,
+      );
+      expect(
+        () => DateTimeX.getSecondsBetween(
+          DateTime(2015, 3, 1),
+          DateTime(2013, 1, 1),
+        ),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns milliseconds between dates', () {
+      expect(
+        DateTimeX.getMillisecondsBetween(
+          DateTime(2013, 3, 1, 1, 1, 1, 1),
+          DateTime(2013, 3, 1, 1, 1, 1, 12),
+        ),
+        11,
+      );
+      expect(
+        () => DateTimeX.getMillisecondsBetween(
+          DateTime(2015, 3, 1),
+          DateTime(2013, 1, 1),
+        ),
+        throwsArgumentError,
+      );
+    });
+
+    test('returns microseconds between dates', () {
+      expect(
+        DateTimeX.getMicrosecondsBetween(
+          DateTime(2013, 3, 1, 1, 1, 1, 1, 1),
+          DateTime(2013, 3, 1, 1, 1, 1, 1, 12),
+        ),
+        11,
+      );
+      expect(
+        () => DateTimeX.getMicrosecondsBetween(
+          DateTime(2015, 3, 1),
+          DateTime(2013, 1, 1),
+        ),
+        throwsArgumentError,
       );
     });
   });
