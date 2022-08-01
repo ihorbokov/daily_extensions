@@ -753,6 +753,13 @@ void main() {
         '[0, 11, 2, 3]',
       );
       expect(
+        DateTimeX.getTimeBetween(
+          DateTime(2013, 7, 29),
+          DateTime(2014, 8, 15),
+        ).toString(),
+        '[1, 0, 2, 3]',
+      );
+      expect(
         () => DateTimeX.getTimeBetween(
           DateTime(2015, 3, 1),
           DateTime(2013, 1, 1),

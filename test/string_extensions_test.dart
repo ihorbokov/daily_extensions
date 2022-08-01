@@ -58,6 +58,11 @@ void main() {
       expect('001122'.isNumeric, isTrue);
     });
 
+    test('checks if string is bin', () {
+      expect('file.svg'.isBin, isFalse);
+      expect('file.bin'.isBin, isTrue);
+    });
+
     test('checks if string is vector', () {
       expect('file.png'.isVector, isFalse);
       expect('file.svg'.isVector, isTrue);

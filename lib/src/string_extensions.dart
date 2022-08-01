@@ -35,6 +35,9 @@ extension StringX on String {
   /// Whether this [String] consists only digits.
   bool get isNumeric => hasMatch(r'^\d+$');
 
+  /// Whether this [String] is bin.
+  bool get isBin => toLowerCase().hasMatch(r'.bin$');
+
   /// Whether this [String] is vector.
   bool get isVector => toLowerCase().hasMatch(r'.svg$');
 

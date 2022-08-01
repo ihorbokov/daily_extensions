@@ -1,6 +1,6 @@
 name: daily_extensions
 description: Set of most useful Dart extensions for daily use that increases development velocity.
-version: 1.0.3
+version: 1.0.4
 homepage: https://github.com/phimary/daily_extensions
 
 environment:

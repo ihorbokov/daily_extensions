@@ -1,3 +1,7 @@
+# 1.0.4
+
+- Added `isBin` extension for `String`.
+
 # 1.0.3
 
 - Added new DateTime extensions: `age`, `yearsUntil` etc.
