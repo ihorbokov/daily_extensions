@@ -1,3 +1,7 @@
+# 1.0.3
+
+- Added new DateTime extensions: `age`, `yearsUntil` etc.
+
 # 1.0.2
 
 - Added DateTime and `mapToListWhere`, `mapToSet`, `mapToSetWhere` extensions.

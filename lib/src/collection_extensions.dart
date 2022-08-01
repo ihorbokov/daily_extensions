@@ -34,6 +34,15 @@ extension SetX<T> on Set<T> {
 
 /// Extensions for [Iterable].
 extension IterableX<T> on Iterable<T> {
+  /// Returns true if length of this [Iterable] is 1.
+  bool get hasOne => length == 1;
+
+  /// Whether length of this [Iterable] is even.
+  bool get isLengthEven => length.isEven;
+
+  /// Whether length of this [Iterable] is odd.
+  bool get isLengthOdd => length.isOdd;
+
   /// Returns this [Iterable] if it's not empty,
   /// otherwise returns [value].
   Iterable<T> ifEmpty(Iterable<T> value) => isEmpty ? value : this;
@@ -63,7 +72,7 @@ extension IterableX<T> on Iterable<T> {
     bool Function(T e) test, {
     bool growable = false,
   }) {
-    late final list = <R>[];
+    final list = <R>[];
     for (final element in this) {
       if (test(element)) list.add(toElement(element));
     }
@@ -89,7 +98,7 @@ extension IterableX<T> on Iterable<T> {
     bool Function(T e) test, {
     bool modifiable = false,
   }) {
-    late final set = <R>{};
+    final set = <R>{};
     for (final element in this) {
       if (test(element)) set.add(toElement(element));
     }
@@ -102,6 +111,15 @@ extension IterableX<T> on Iterable<T> {
 
 /// Extensions for [Map].
 extension MapX<K, V> on Map<K, V> {
+  /// Returns true if length of this [Map] is 1.
+  bool get hasOne => length == 1;
+
+  /// Whether length of this [Map] is even.
+  bool get isLengthEven => length.isEven;
+
+  /// Whether length of this [Map] is odd.
+  bool get isLengthOdd => length.isOdd;
+
   /// Returns this [Map] if it's not empty,
   /// otherwise returns [value].
   Map<K, V> ifEmpty(Map<K, V> value) => isEmpty ? value : this;

@@ -141,19 +141,29 @@ extension DateTimeX on DateTime {
 
   /// Returns true if this [DateTime] is in the range: [start]..[end].
   bool isBetween(DateTime start, DateTime end) =>
-      daysBetween(start, end).contains(toDate());
+      getDaysRange(start, end).contains(toDate());
+
+  /// Returns the age for the current date in the next format - [31, 2, 3, 6]:
+  /// `[31, 2, 3, 6] corresponds to 31 years, 2 months, 3 weeks and 6 days`.
+  List<int> get age => getTimeBetween(this, DateTimeX.today);
+
+  /// Returns the day of the [year].
+  int get yearDay => getDaysBetween(firstYearDay, this) + 1;
 
   /// Returns the number of days in this [DateTime]'s month.
-  int get monthLength => daysIn(year, month);
+  int get monthLength => getDaysPerMonth(year, month);
+
+  /// Returns the number of days in this [DateTime]'s year.
+  int get yearLength => getDaysPerYear(year);
 
   /// Returns days of this [DateTime]'s week.
-  Iterable<DateTime> get weekDays => daysBetween(firstWeekDay, lastWeekDay);
+  Iterable<DateTime> get weekDays => getDaysRange(firstWeekDay, lastWeekDay);
 
   /// Returns days of this [DateTime]'s month.
-  Iterable<DateTime> get monthDays => daysBetween(firstMonthDay, lastMonthDay);
+  Iterable<DateTime> get monthDays => getDaysRange(firstMonthDay, lastMonthDay);
 
   /// Returns days of this [DateTime]'s year.
-  Iterable<DateTime> get yearDays => daysBetween(firstYearDay, lastYearDay);
+  Iterable<DateTime> get yearDays => getDaysRange(firstYearDay, lastYearDay);
 
   /// Returns the next day's [DateTime].
   DateTime get nextDay => add(1.toDays());
@@ -206,6 +216,37 @@ extension DateTimeX on DateTime {
     return '${timeZoneOffset.inHours < 0 ? '-' : '+'}${time.join(':')}';
   }
 
+  /// Returns the time until [date] in the next format - [31, 2, 3, 6]:
+  /// `[31, 2, 3, 6] corresponds to 31 years, 2 months, 3 weeks and 6 days`.
+  List<int> timeUntil(DateTime date) => getTimeBetween(this, date);
+
+  /// Returns the number of full years until [date].
+  int yearsUntil(DateTime date) => getYearsBetween(this, date);
+
+  /// Returns the number of full months until [date].
+  int monthsUntil(DateTime date) => getMonthsBetween(this, date);
+
+  /// Returns the number of full weeks until [date].
+  int weeksUntil(DateTime date) => getWeeksBetween(this, date);
+
+  /// Returns the number of days until [date].
+  int daysUntil(DateTime date) => getDaysBetween(this, date);
+
+  /// Returns the number of hours until [date].
+  int hoursUntil(DateTime date) => getHoursBetween(this, date);
+
+  /// Returns the number of minutes until [date].
+  int minutesUntil(DateTime date) => getMinutesBetween(this, date);
+
+  /// Returns the number of seconds until [date].
+  int secondsUntil(DateTime date) => getSecondsBetween(this, date);
+
+  /// Returns the number of milliseconds until [date].
+  int millisecondsUntil(DateTime date) => getMillisecondsBetween(this, date);
+
+  /// Returns the number of microseconds until [date].
+  int microsecondsUntil(DateTime date) => getMicrosecondsBetween(this, date);
+
   /// Returns only date from this [DateTime].
   DateTime toDate() => DateTime(year, month, day);
 
@@ -238,10 +279,14 @@ extension DateTimeX on DateTime {
       (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0));
 
   /// Returns the number of days in the [month] of the [year].
-  static int daysIn(int year, int month) => DateTime(year, month + 1, 0).day;
+  static int getDaysPerMonth(int year, int month) =>
+      DateTime(year, month + 1, 0).day;
+
+  /// Returns the number of days in the [year].
+  static int getDaysPerYear(int year) => isLeap(year) ? 366 : 365;
 
   /// Returns days in the [DateTime]'s range: [start]..[end].
-  static Iterable<DateTime> daysBetween(DateTime start, DateTime end) {
+  static Iterable<DateTime> getDaysRange(DateTime start, DateTime end) {
     if (start.isAtSameDayAs(end) || start.isAfter(end)) {
       throw ArgumentError('Invalid range: $start..$end');
     }
@@ -265,7 +310,7 @@ extension DateTimeX on DateTime {
 
   /// Returns the last day of the [month] in the [year].
   static DateTime getLastMonthDay(int year, int month) =>
-      DateTime(year, month, daysIn(year, month));
+      DateTime(year, month, getDaysPerMonth(year, month));
 
   /// Returns the first day of the [year].
   static DateTime getFirstYearDay(int year) =>
@@ -274,4 +319,88 @@ extension DateTimeX on DateTime {
   /// Returns the last day of the [year].
   static DateTime getLastYearDay(int year) =>
       getLastMonthDay(year, DateTime.december);
+
+  /// Returns the time between [start] and [end] dates in
+  /// years, months, weeks and days. For example:
+  /// `[31, 2, 3, 6] corresponds to 31 years, 2 months, 3 weeks and 6 days`.
+  static List<int> getTimeBetween(DateTime start, DateTime end) {
+    if (start.isAfter(end)) throw ArgumentError('Invalid range: $start..$end');
+
+    const monthsPerYear = DateTime.monthsPerYear;
+    const daysPerWeek = DateTime.daysPerWeek;
+
+    var years = end.year - start.year;
+    var months = end.month - start.month;
+    var days = end.day - start.day;
+
+    final totalMonths = monthsPerYear * years + months;
+    years = (totalMonths / monthsPerYear).floor();
+    months = totalMonths % monthsPerYear;
+
+    if (end.day < start.day) {
+      days = getDaysPerMonth(start.year, start.month) + days;
+      if (months > 0) {
+        months--;
+      } else {
+        years--;
+        months = monthsPerYear - 1;
+      }
+    }
+    return [years, months, (days / daysPerWeek).floor(), days % daysPerWeek];
+  }
+
+  /// Returns the number of full years between [start] and [end] dates.
+  static int getYearsBetween(DateTime start, DateTime end) {
+    if (start.isAfter(end)) throw ArgumentError('Invalid range: $start..$end');
+    return getTimeBetween(start, end)[0];
+  }
+
+  /// Returns the number of full months between [start] and [end] dates.
+  static int getMonthsBetween(DateTime start, DateTime end) {
+    if (start.isAfter(end)) throw ArgumentError('Invalid range: $start..$end');
+    final duration = getTimeBetween(start, end);
+    return duration[0] * DateTime.monthsPerYear + duration[1];
+  }
+
+  /// Returns the number of full weeks between [start] and [end] dates.
+  static int getWeeksBetween(DateTime start, DateTime end) {
+    if (start.isAfter(end)) throw ArgumentError('Invalid range: $start..$end');
+    return (end.difference(start).inDays / DateTime.daysPerWeek).floor();
+  }
+
+  /// Returns the number of days between [start] and [end] dates.
+  static int getDaysBetween(DateTime start, DateTime end) {
+    if (start.isAfter(end)) throw ArgumentError('Invalid range: $start..$end');
+    return end.difference(start).inDays;
+  }
+
+  /// Returns the number of hours between [start] and [end] dates.
+  static int getHoursBetween(DateTime start, DateTime end) {
+    if (start.isAfter(end)) throw ArgumentError('Invalid range: $start..$end');
+    return end.difference(start).inHours;
+  }
+
+  /// Returns the number of minutes between [start] and [end] dates.
+  static int getMinutesBetween(DateTime start, DateTime end) {
+    if (start.isAfter(end)) throw ArgumentError('Invalid range: $start..$end');
+    return end.difference(start).inMinutes;
+  }
+
+  /// Returns the number of seconds between [start] and [end] dates.
+  static int getSecondsBetween(DateTime start, DateTime end) {
+    if (start.isAfter(end)) throw ArgumentError('Invalid range: $start..$end');
+    return end.difference(start).inSeconds;
+  }
+
+  /// Returns the number of milliseconds between [start] and [end] dates.
+  static int getMillisecondsBetween(DateTime start, DateTime end) {
+    if (start.isAfter(end)) throw ArgumentError('Invalid range: $start..$end');
+    return end.difference(start).inMilliseconds;
+  }
+
+  /// Returns the number of microseconds between [start] and [end] dates.
+  static int getMicrosecondsBetween(DateTime start, DateTime end) {
+    if (start.isAfter(end)) throw ArgumentError('Invalid range: $start..$end');
+    return end.difference(start).inMicroseconds;
+  }
 }

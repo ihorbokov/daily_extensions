@@ -68,6 +68,24 @@ void main() {
     const testEmptyIterable = Iterable<int>.empty();
     const Iterable<int>? testNullableIterable = null;
 
+    test('checks if length is 1', () {
+      expect(testEmptyIterable.hasOne, isFalse);
+      expect(testIterable.hasOne, isFalse);
+      expect(Iterable<int>.generate(1).hasOne, isTrue);
+    });
+
+    test('checks if length is even', () {
+      expect(testEmptyIterable.isLengthEven, isTrue);
+      expect(testIterable.isLengthEven, isFalse);
+      expect(Iterable<int>.generate(2).isLengthEven, isTrue);
+    });
+
+    test('checks if length is odd', () {
+      expect(testEmptyIterable.isLengthOdd, isFalse);
+      expect(testIterable.isLengthOdd, isTrue);
+      expect(Iterable<int>.generate(2).isLengthOdd, isFalse);
+    });
+
     test('returns value in empty case', () {
       final iterable = testIterable.ifEmpty([2]);
       expect(iterable, isA<Iterable>());
@@ -184,6 +202,24 @@ void main() {
     final testMap = {2022: 'Mary'};
     const testEmptyMap = <int, String>{};
     const Map<int, String>? testNullableMap = null;
+
+    test('checks if length is 1', () {
+      expect(testEmptyMap.hasOne, isFalse);
+      expect(testMap.hasOne, isTrue);
+      expect({2022: 'Mary', 202: 'Hello'}.hasOne, isFalse);
+    });
+
+    test('checks if length is even', () {
+      expect(testEmptyMap.isLengthEven, isTrue);
+      expect(testMap.isLengthEven, isFalse);
+      expect({2022: 'Mary', 202: 'Hello'}.isLengthEven, isTrue);
+    });
+
+    test('checks if length is odd', () {
+      expect(testEmptyMap.isLengthOdd, isFalse);
+      expect(testMap.isLengthOdd, isTrue);
+      expect({2022: 'Mary', 202: 'Hello'}.isLengthOdd, isFalse);
+    });
 
     test('returns value in empty case', () {
       final map = testMap.ifEmpty({1: 'Hello'});
