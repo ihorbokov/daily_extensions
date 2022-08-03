@@ -2,6 +2,9 @@ import 'number_extensions.dart';
 
 /// Extensions for [DateTime].
 extension DateTimeX on DateTime {
+  /// Epoch [DateTime].
+  static final epoch = DateTime.fromMicrosecondsSinceEpoch(0);
+
   /// Minimum possible [DateTime].
   static final min = DateTime.utc(-271821, 04, 20);
 

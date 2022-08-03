@@ -3,6 +3,10 @@ import 'package:test/test.dart';
 
 void main() {
   group('DateTime Extensions', () {
+    test('returns Epoch date', () {
+      expect(DateTimeX.epoch.toDate(), DateTime(1970, 01, 01));
+    });
+
     test('returns minimum possible date', () {
       expect(DateTimeX.min, DateTime.utc(-271821, 04, 20));
     });

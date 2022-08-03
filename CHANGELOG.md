@@ -1,3 +1,7 @@
+# 1.0.5
+
+- Added Epoch `DateTime`.
+
 # 1.0.4
 
 - Added `isBin` extension for `String`.
