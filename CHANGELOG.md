@@ -1,3 +1,7 @@
+# 1.0.6
+
+- Added extensions for `void Function()`.
+
 # 1.0.5
 
 - Added Epoch `DateTime`.
