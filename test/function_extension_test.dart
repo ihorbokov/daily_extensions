@@ -5,13 +5,13 @@ void main() {
   group('void Function() Extensions', () {
     test('invokes one time during duration', () async {
       var value = 0;
-      final func1 = () => value++;
+      final func = () => value++;
 
       for (var i = 0; i <= 5; i++) {
-        func1.throttle();
+        func.throttle();
       }
       await Future<void>.delayed(const Duration(seconds: 1));
-      func1.throttle();
+      func.throttle();
       expect(value, 2);
 
       for (var i = 0; i <= 5; i++) {
@@ -23,6 +23,26 @@ void main() {
       await Future<void>.delayed(const Duration(seconds: 2));
       (() => value++).throttle(tag: 'func');
       expect(value, 4);
+    });
+
+    test('invokes the last call after given duration', () async {
+      var value = 0;
+      final func = () => value++;
+
+      for (var i = 0; i <= 5; i++) {
+        func.debounce();
+      }
+      await Future<void>.delayed(const Duration(seconds: 1));
+      expect(value, 1);
+
+      for (var i = 0; i <= 5; i++) {
+        (() => value++).debounce(
+          tag: 'func',
+          duration: const Duration(seconds: 2),
+        );
+      }
+      await Future<void>.delayed(const Duration(seconds: 2));
+      expect(value, 2);
     });
 
     test('invokes after duration', () async {
