@@ -1,3 +1,7 @@
+# 1.0.7
+
+- Code refactoring.
+
 # 1.0.6
 
 - Added extensions for `void Function()`.

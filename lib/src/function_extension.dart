@@ -11,8 +11,7 @@ extension VoidFunctionX on void Function() {
   /// to identify the [Function].
   void throttle({String? tag, Duration duration = const Duration(seconds: 1)}) {
     tag ??= '$hashCode';
-    final timer = _throttleTimers[tag];
-    if (timer == null) {
+    if (!_throttleTimers.containsKey(tag)) {
       _throttleTimers[tag] = Timer(
         duration,
         () => _throttleTimers.remove(tag),
@@ -28,13 +27,10 @@ extension VoidFunctionX on void Function() {
   void debounce({String? tag, Duration duration = const Duration(seconds: 1)}) {
     tag ??= '$hashCode';
     _debounceTimers[tag]?.cancel();
-    _debounceTimers[tag] = Timer(
-      duration,
-      () {
-        _debounceTimers.remove(tag);
-        this();
-      },
-    );
+    _debounceTimers[tag] = Timer(duration, () {
+      _debounceTimers.remove(tag);
+      this();
+    });
   }
 
   /// Invokes the [Function] after the given [duration] if not
