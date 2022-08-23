@@ -500,6 +500,9 @@ void main() {
 
       expect(testNullableString.orEmpty, '');
       expect('Hello!'.orEmpty, 'Hello!');
+
+      expect(testNullableString.ifEmptyOrNull('Hello!'), 'Hello!');
+      expect('Hello, Dart!'.ifEmptyOrNull('Hello!'), 'Hello, Dart!');
     });
   });
 }
