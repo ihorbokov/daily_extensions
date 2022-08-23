@@ -1,3 +1,7 @@
+# 1.0.8
+
+- Added `ifBlankOrNull, ifEmptyOrNull` extension for `String`.
+
 # 1.0.7
 
 - Code refactoring.

@@ -501,6 +501,12 @@ void main() {
       expect(testNullableString.orEmpty, '');
       expect('Hello!'.orEmpty, 'Hello!');
 
+      expect(''.ifBlankOrNull('Hello!'), 'Hello!');
+      expect('   '.ifBlankOrNull('Hello!'), 'Hello!');
+      expect(testNullableString.ifBlankOrNull('Hello!'), 'Hello!');
+      expect('Hello, Dart!'.ifBlankOrNull('Hello!'), 'Hello, Dart!');
+
+      expect(''.ifEmptyOrNull('Hello!'), 'Hello!');
       expect(testNullableString.ifEmptyOrNull('Hello!'), 'Hello!');
       expect('Hello, Dart!'.ifEmptyOrNull('Hello!'), 'Hello, Dart!');
     });

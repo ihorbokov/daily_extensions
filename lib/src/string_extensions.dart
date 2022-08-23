@@ -340,7 +340,11 @@ extension StringNullableX on String? {
   /// otherwise returns this [String].
   String get orEmpty => this ?? '';
 
-  /// Returns [value] if this nullable [String] is null or empty,
+  /// Returns [value] if this nullable [String] is blank or null,
+  /// otherwise returns this [String].
+  String ifBlankOrNull(String value) => isBlankOrNull ? value : this!;
+
+  /// Returns [value] if this nullable [String] is empty or null,
   /// otherwise returns this [String].
   String ifEmptyOrNull(String value) => isEmptyOrNull ? value : this!;
 }
