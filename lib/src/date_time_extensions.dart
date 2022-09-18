@@ -215,7 +215,7 @@ extension DateTimeX on DateTime {
   String get digitalTimeZoneOffset {
     final hours = timeZoneOffset.inHours.abs();
     final minutes = timeZoneOffset.inMinutes.remainder(60).abs();
-    final time = [hours, minutes].map((timeUnit) => timeUnit.toIndex(2));
+    final time = [hours, minutes].map((timeUnit) => timeUnit.padLeft(2));
     return '${timeZoneOffset.inHours < 0 ? '-' : '+'}${time.join(':')}';
   }
 

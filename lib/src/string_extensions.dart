@@ -209,13 +209,7 @@ extension StringX on String {
   /// Capitalize the first letter of this [String].
   String capitalizeFirst() {
     if (isBlank) return '';
-    return this[0].toUpperCase() + substring(1).toLowerCase();
-  }
-
-  /// Capitalize the first letter of each word in this [String].
-  String capitalizeAll() {
-    if (isBlank) return '';
-    return splitBySpaces().map((word) => word.capitalizeFirst()).join(' ');
+    return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
   }
 
   /// Removes all substrings that match [pattern] from this [String].
@@ -263,22 +257,54 @@ extension StringX on String {
     return formatted;
   }
 
+  /// Converts this [String] to Title case.
+  ///
+  /// Example: `Hello to all -> Hello To All`.
+  String toTitleCase() {
+    if (isBlank) return '';
+    return splitBySpaces().map((word) => word.capitalizeFirst()).join(' ');
+  }
+
   /// Converts this [String] to Camel case.
+  ///
+  /// Example: `Hello to all -> helloToAll`.
   String toCamelCase() {
     if (isBlank) return '';
-    final words = splitBySpaces();
-    final buffer = StringBuffer(words[0].toLowerCase());
-    for (var index = 1; index < words.length; index++) {
-      buffer.write(words[index].capitalizeFirst());
-    }
-    return buffer.toString();
+    final value = toPascalCase();
+    return '${value[0].toLowerCase()}${value.substring(1)}';
+  }
+
+  /// Converts this [String] to Pascal case.
+  ///
+  /// Example: `Hello to all -> HelloToAll`.
+  String toPascalCase() {
+    if (isBlank) return '';
+    return splitBySpaces().map((word) => word.capitalizeFirst()).join();
   }
 
   /// Converts this [String] to Snake case.
-  String toSnakeCase() => isBlank ? '' : replaceAll(' ', '_').toLowerCase();
+  ///
+  /// Example: `Hello to all -> hello_to_all`.
+  String toSnakeCase() {
+    if (isBlank) return '';
+    return replaceAll(' ', '_').toLowerCase();
+  }
 
-  /// Converts this [String] to Param case.
-  String toParamCase() => isBlank ? '' : replaceAll(' ', '-').toLowerCase();
+  /// Converts this [String] to Kebab case.
+  ///
+  /// Example: `Hello to all -> hello-to-all`.
+  String toKebabCase() {
+    if (isBlank) return '';
+    return replaceAll(' ', '-').toLowerCase();
+  }
+
+  /// Converts this [String] to abbreviation.
+  ///
+  /// Example: `Hello to all -> Hta`.
+  String toAbbreviation() {
+    if (isBlank) return '';
+    return splitBySpaces().map((word) => word[0]).join();
+  }
 
   /// Converts this [String] to country flag, ignoring lower case and
   /// upper case differences.

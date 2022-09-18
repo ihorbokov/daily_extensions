@@ -29,13 +29,6 @@ void main() {
       expect(() => 2020.last(5), throwsRangeError);
     });
 
-    test('returns index string-representation', () {
-      expect(202.toIndex(4), '0202');
-      expect(2022.toIndex(4), '2022');
-      expect(12345.toIndex(3), '12345');
-      expect(() => (-2).toIndex(3), throwsArgumentError);
-    });
-
     test('converts to duration in days', () {
       expect(1.toDays(), const Duration(days: 1));
       expect(7.toDays(), const Duration(days: 7));
@@ -127,6 +120,41 @@ void main() {
       expect(value, isA<num>());
       expect(value, 2022.2);
       expect(zero.ifZero(2022.2), 2022.2);
+    });
+
+    test('returns string with padding on the left', () {
+      expect(202.padLeft(4), '0202');
+      expect(2022.padLeft(4), '2022');
+      expect(12345.padLeft(3), '12345');
+      expect(123.45.padLeft(7, '*'), '*123.45');
+    });
+
+    test('returns string with padding on the right', () {
+      expect(202.padRight(4), '2020');
+      expect(2022.padRight(4), '2022');
+      expect(12345.padRight(3), '12345');
+      expect(123.45.padRight(7, '*'), '123.45*');
+    });
+
+    test('checks if within the given range', () {
+      expect(29.07.isBetween(10, 30), isTrue);
+      expect(29.07.isBetween(10, 20), isFalse);
+      expect(29.07.isBetween(29.07, 30), isFalse);
+      expect(
+        29.07.isBetween(29.07, 30, startInclusive: true),
+        isTrue,
+      );
+      expect(30.isBetween(29.07, 30), isFalse);
+      expect(
+        30.isBetween(29.07, 30, endInclusive: true),
+        isTrue,
+      );
+      expect(
+        5.isBetween(1, 10, startInclusive: true, endInclusive: true),
+        isTrue,
+      );
+      expect(() => 2.isBetween(2, 2), throwsArgumentError);
+      expect(() => 2.isBetween(5, 1), throwsArgumentError);
     });
 
     test('returns actual value', () {

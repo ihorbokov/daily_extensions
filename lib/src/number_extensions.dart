@@ -32,13 +32,6 @@ extension IntX on int {
     return int.parse('$absolute'.substring(length - n, length));
   }
 
-  /// Returns a string-representation of this [int] that contains
-  /// at least [length] digits with leading zeros.
-  String toIndex(int length) {
-    if (isNegative) throw ArgumentError('$this is negative.');
-    return '$this'.padLeft(length, '0');
-  }
-
   /// Converts this [int] to [Duration] in days.
   Duration toDays() => Duration(days: this);
 
@@ -97,6 +90,40 @@ extension NumX on num {
   /// Returns this [num] if it's not zero,
   /// otherwise returns [value].
   num ifZero(num value) => this == 0 ? value : this;
+
+  /// Returns a [String] that prepends [padding] on the left of this [int]
+  /// if it is shorter than [width].
+  String padLeft(int width, [String padding = '0']) =>
+      '$this'.padLeft(width, padding);
+
+  /// Returns a [String] that appends [padding] on the right of this [int]
+  /// if it is shorter than [width].
+  String padRight(int width, [String padding = '0']) =>
+      '$this'.padRight(width, padding);
+
+  /// Returns true if this [num] is within the given range [start]..[end].
+  ///
+  /// Range is closed if [startInclusive] and [endInclusive] are true,
+  /// otherwise - open.
+  bool isBetween(
+    num start,
+    num end, {
+    bool startInclusive = false,
+    bool endInclusive = false,
+  }) {
+    if (start >= end) {
+      throw ArgumentError('Invalid range: $start..$end');
+    }
+    if (startInclusive && endInclusive) {
+      return start <= this && this <= end;
+    } else if (startInclusive) {
+      return start <= this && this < end;
+    } else if (endInclusive) {
+      return start < this && this <= end;
+    } else {
+      return start < this && this < end;
+    }
+  }
 
   /// Truncates this [num] to [int] if this [num] is [int],
   /// otherwise returns this [num].

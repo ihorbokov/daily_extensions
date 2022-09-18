@@ -1,3 +1,8 @@
+# 1.1.0
+
+- Added `isBetween` extension for `num`, `toAbbreviation` for `String`.
+- Code refactoring.
+
 # 1.0.8
 
 - Added `ifBlankOrNull, ifEmptyOrNull` extension for `String`.

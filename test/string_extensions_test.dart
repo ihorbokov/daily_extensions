@@ -355,12 +355,6 @@ void main() {
       expect('hello World!'.capitalizeFirst(), 'Hello world!');
     });
 
-    test('capitalizes all', () {
-      expect(''.capitalizeAll(), '');
-      expect('hello'.capitalizeAll(), 'Hello');
-      expect('hello world!'.capitalizeAll(), 'Hello World!');
-    });
-
     test('removes substrings', () {
       expect(''.remove('l'), '');
       expect('hello'.remove('l'), 'heo');
@@ -429,10 +423,22 @@ void main() {
       expect('%s %s!'.format(['Hello', 'World']), 'Hello World!');
     });
 
+    test('converts to Title case', () {
+      expect(''.toTitleCase(), '');
+      expect('hello'.toTitleCase(), 'Hello');
+      expect('hello world!'.toTitleCase(), 'Hello World!');
+    });
+
     test('converts to Camel case', () {
       expect(''.toCamelCase(), '');
       expect('hello'.toCamelCase(), 'hello');
       expect('Hello World'.toCamelCase(), 'helloWorld');
+    });
+
+    test('converts to Pascal case', () {
+      expect(''.toPascalCase(), '');
+      expect('hello'.toPascalCase(), 'Hello');
+      expect('Hello world'.toPascalCase(), 'HelloWorld');
     });
 
     test('converts to Snake case', () {
@@ -441,10 +447,16 @@ void main() {
       expect('Hello World'.toSnakeCase(), 'hello_world');
     });
 
-    test('converts to Param case', () {
-      expect(''.toParamCase(), '');
-      expect('hello'.toParamCase(), 'hello');
-      expect('Hello World'.toParamCase(), 'hello-world');
+    test('converts to Kebab case', () {
+      expect(''.toKebabCase(), '');
+      expect('hello'.toKebabCase(), 'hello');
+      expect('Hello World'.toKebabCase(), 'hello-world');
+    });
+
+    test('converts to abbreviation', () {
+      expect(''.toAbbreviation(), '');
+      expect('hello'.toAbbreviation(), 'h');
+      expect('Hello World'.toAbbreviation(), 'HW');
     });
 
     test('converts to country flag', () {
