@@ -15,9 +15,9 @@ void main() {
       expect(DateTimeX.max, DateTime.utc(275760, 09, 13));
     });
 
-    test('returns today', () {
+    test('returns now', () {
       expect(
-        DateTimeX.today.toDate(),
+        DateTimeX.now.toDate(),
         DateTime.now().toDate(),
       );
     });
@@ -25,64 +25,64 @@ void main() {
     test('returns tomorrow', () {
       expect(
         DateTimeX.tomorrow.toDate(),
-        DateTimeX.today.nextDay.toDate(),
+        DateTimeX.now.nextDay.toDate(),
       );
     });
 
     test('returns yesterday', () {
       expect(
         DateTimeX.yesterday.toDate(),
-        DateTimeX.today.previousDay.toDate(),
+        DateTimeX.now.previousDay.toDate(),
       );
     });
 
     test('checks if date is today', () {
-      expect(DateTimeX.today.isToday, isTrue);
+      expect(DateTimeX.now.isToday, isTrue);
       expect(DateTimeX.tomorrow.isToday, isFalse);
     });
 
     test('checks if date is tomorrow', () {
-      expect(DateTimeX.today.isTomorrow, isFalse);
+      expect(DateTimeX.now.isTomorrow, isFalse);
       expect(DateTimeX.tomorrow.isTomorrow, isTrue);
     });
 
     test('checks if date is yesterday', () {
-      expect(DateTimeX.today.isYesterday, isFalse);
+      expect(DateTimeX.now.isYesterday, isFalse);
       expect(DateTimeX.yesterday.isYesterday, isTrue);
     });
 
     test('checks if date is first week day', () {
-      expect(DateTimeX.today.firstWeekDay.isFirstWeekDay, isTrue);
+      expect(DateTimeX.now.firstWeekDay.isFirstWeekDay, isTrue);
       expect(DateTime(2022, 7, 25).isFirstWeekDay, isTrue);
       expect(DateTime(2022, 7, 26).isFirstWeekDay, isFalse);
     });
 
     test('checks if date is last week day', () {
-      expect(DateTimeX.today.lastWeekDay.isLastWeekDay, isTrue);
+      expect(DateTimeX.now.lastWeekDay.isLastWeekDay, isTrue);
       expect(DateTime(2022, 7, 31).isLastWeekDay, isTrue);
       expect(DateTime(2022, 7, 30).isLastWeekDay, isFalse);
     });
 
     test('checks if date is first month day', () {
-      expect(DateTimeX.today.firstMonthDay.isFirstMonthDay, isTrue);
+      expect(DateTimeX.now.firstMonthDay.isFirstMonthDay, isTrue);
       expect(DateTime(2022, 7, 1).isFirstMonthDay, isTrue);
       expect(DateTime(2022, 7, 2).isFirstMonthDay, isFalse);
     });
 
     test('checks if date is last month day', () {
-      expect(DateTimeX.today.lastMonthDay.isLastMonthDay, isTrue);
+      expect(DateTimeX.now.lastMonthDay.isLastMonthDay, isTrue);
       expect(DateTime(2022, 7, 31).isLastMonthDay, isTrue);
       expect(DateTime(2022, 7, 30).isLastMonthDay, isFalse);
     });
 
     test('checks if date is first year day', () {
-      expect(DateTimeX.today.firstYearDay.isFirstYearDay, isTrue);
+      expect(DateTimeX.now.firstYearDay.isFirstYearDay, isTrue);
       expect(DateTime(2022, 1, 1).isFirstYearDay, isTrue);
       expect(DateTime(2022, 12, 31).isFirstYearDay, isFalse);
     });
 
     test('checks if date is last year day', () {
-      expect(DateTimeX.today.lastYearDay.isLastYearDay, isTrue);
+      expect(DateTimeX.now.lastYearDay.isLastYearDay, isTrue);
       expect(DateTime(2022, 1, 1).isLastYearDay, isFalse);
       expect(DateTime(2022, 12, 31).isLastYearDay, isTrue);
     });
@@ -340,9 +340,9 @@ void main() {
     });
 
     test('returns age', () {
-      expect(DateTimeX.today.age.toString(), '[0, 0, 0, 0]');
+      expect(DateTimeX.now.age.toString(), '[0, 0, 0, 0]');
       expect(DateTime(2013, 1, 1).age.length, 4);
-      expect(() => DateTimeX.today.nextYear.age, throwsArgumentError);
+      expect(() => DateTimeX.now.nextYear.age, throwsArgumentError);
     });
 
     test('returns day of the year', () {
@@ -497,7 +497,7 @@ void main() {
 
     test('returns time until date', () {
       expect(
-        DateTimeX.today.timeUntil(DateTimeX.today.nextYear).toString(),
+        DateTimeX.now.timeUntil(DateTimeX.now.nextYear).toString(),
         '[1, 0, 0, 0]',
       );
       expect(
@@ -512,8 +512,8 @@ void main() {
 
     test('returns years until date', () {
       expect(
-        DateTimeX.today.yearsUntil(
-          DateTimeX.today.nextYear,
+        DateTimeX.now.yearsUntil(
+          DateTimeX.now.nextYear,
         ),
         1,
       );
@@ -531,8 +531,8 @@ void main() {
 
     test('returns months until date', () {
       expect(
-        DateTimeX.today.monthsUntil(
-          DateTimeX.today.nextMonth,
+        DateTimeX.now.monthsUntil(
+          DateTimeX.now.nextMonth,
         ),
         1,
       );
@@ -550,8 +550,8 @@ void main() {
 
     test('returns weeks until date', () {
       expect(
-        DateTimeX.today.weeksUntil(
-          DateTimeX.today.nextMonth,
+        DateTimeX.now.weeksUntil(
+          DateTimeX.now.nextMonth,
         ),
         4,
       );

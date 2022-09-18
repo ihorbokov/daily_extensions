@@ -11,17 +11,17 @@ extension DateTimeX on DateTime {
   /// Maximum possible [DateTime].
   static final max = DateTime.utc(275760, 09, 13);
 
-  /// Returns today's [DateTime].
-  static DateTime get today => DateTime.now();
+  /// Returns now's [DateTime].
+  static DateTime get now => DateTime.now();
 
   /// Returns tomorrow's [DateTime].
-  static DateTime get tomorrow => today.add(1.toDays());
+  static DateTime get tomorrow => now.add(const Duration(days: 1));
 
   /// Returns yesterday's [DateTime].
-  static DateTime get yesterday => today.subtract(1.toDays());
+  static DateTime get yesterday => now.subtract(const Duration(days: 1));
 
   /// Whether this [DateTime] is today.
-  bool get isToday => isAtSameDayAs(today);
+  bool get isToday => isAtSameDayAs(now);
 
   /// Whether this [DateTime] is tomorrow.
   bool get isTomorrow => isAtSameDayAs(tomorrow);
@@ -148,7 +148,7 @@ extension DateTimeX on DateTime {
 
   /// Returns the age for the current date in the next format - [31, 2, 3, 6]:
   /// `[31, 2, 3, 6] corresponds to 31 years, 2 months, 3 weeks and 6 days`.
-  List<int> get age => getTimeBetween(this, DateTimeX.today);
+  List<int> get age => getTimeBetween(this, now);
 
   /// Returns the day of the [year].
   int get yearDay => getDaysBetween(firstYearDay, this) + 1;
@@ -169,16 +169,16 @@ extension DateTimeX on DateTime {
   Iterable<DateTime> get yearDays => getDaysRange(firstYearDay, lastYearDay);
 
   /// Returns the next day's [DateTime].
-  DateTime get nextDay => add(1.toDays());
+  DateTime get nextDay => add(const Duration(days: 1));
 
   /// Returns the previous day's [DateTime].
-  DateTime get previousDay => subtract(1.toDays());
+  DateTime get previousDay => subtract(const Duration(days: 1));
 
   /// Returns the next week's [DateTime].
-  DateTime get nextWeek => add(7.toDays());
+  DateTime get nextWeek => add(const Duration(days: 7));
 
   /// Returns the previous week's [DateTime].
-  DateTime get previousWeek => subtract(7.toDays());
+  DateTime get previousWeek => subtract(const Duration(days: 7));
 
   /// Returns the next month's [DateTime].
   DateTime get nextMonth => copyWith(month: month + 1);
@@ -212,6 +212,8 @@ extension DateTimeX on DateTime {
 
   /// Returns a string-representation of this [timeZoneOffset]
   /// in digital format.
+  ///
+  /// Example: `3:00 -> +03:00, -3:00 -> -03:00`.
   String get digitalTimeZoneOffset {
     final hours = timeZoneOffset.inHours.abs();
     final minutes = timeZoneOffset.inMinutes.remainder(60).abs();
