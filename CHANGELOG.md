@@ -1,3 +1,7 @@
+# 1.1.1
+
+- Added `isHex` extension for `String`.
+
 # 1.1.0
 
 - Added `isBetween` extension for `num`, `toAbbreviation` for `String`.
