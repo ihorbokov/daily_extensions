@@ -38,6 +38,9 @@ extension StringX on String {
   /// Whether this [String] is bin.
   bool get isBin => toLowerCase().hasMatch(r'.bin$');
 
+  /// Whether this [String] is hex.
+  bool get isHex => toLowerCase().hasMatch(r'.hex$');
+
   /// Whether this [String] is vector.
   bool get isVector => toLowerCase().hasMatch(r'.svg$');
 

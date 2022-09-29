@@ -63,6 +63,11 @@ void main() {
       expect('file.bin'.isBin, isTrue);
     });
 
+    test('checks if string is hex', () {
+      expect('file.svg'.isHex, isFalse);
+      expect('file.hex'.isHex, isTrue);
+    });
+
     test('checks if string is vector', () {
       expect('file.png'.isVector, isFalse);
       expect('file.svg'.isVector, isTrue);
