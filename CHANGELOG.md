@@ -1,3 +1,7 @@
+# 1.1.3
+
+- Code refactoring.
+
 # 1.1.2
 
 - Added `isActualVersion` extension for `String`.

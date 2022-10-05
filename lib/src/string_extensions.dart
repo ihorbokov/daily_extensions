@@ -167,20 +167,20 @@ extension StringX on String {
   bool isStrongPassword([int min = 8]) => hasMatch(
       r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])\S{%s,}$'.format(['$min']));
 
-  /// Whether this [String] is actual version.
+  /// Whether this [String] is new version.
   ///
-  /// Length and [delimiter] of this [String] and [newVersion] must be the same.
-  bool isActualVersion(String newVersion, {String delimiter = '.'}) {
+  /// Length and [delimiter] of this [String] and [version] must be the same.
+  bool isNewVersion(String version, {String delimiter = '.'}) {
     final firstVersion = split(delimiter);
-    final secondVersion = newVersion.split(delimiter);
-    var isActual = false;
+    final secondVersion = version.split(delimiter);
+    var isNew = false;
     for (var i = 0; i < firstVersion.length; i++) {
       final firstNumber = int.parse(firstVersion[i]);
       final secondNumber = int.parse(secondVersion[i]);
-      isActual = firstNumber >= secondNumber;
+      isNew = firstNumber >= secondNumber;
       if (firstNumber != secondNumber) break;
     }
-    return isActual;
+    return isNew;
   }
 
   /// Returns this [String] if it's not empty,

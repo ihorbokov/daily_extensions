@@ -264,16 +264,16 @@ void main() {
     });
 
     test('checks if string is actual version', () {
-      expect('1.0.0'.isActualVersion('1.0.0'), isTrue);
-      expect('2.0.0'.isActualVersion('1.0.0'), isTrue);
-      expect('1.1.0'.isActualVersion('1.0.0'), isTrue);
-      expect('1.0.1'.isActualVersion('1.0.0'), isTrue);
-      expect('1.0.0'.isActualVersion('2.0.0'), isFalse);
-      expect('1.0.0'.isActualVersion('1.1.0'), isFalse);
-      expect('1.0.0'.isActualVersion('1.0.1'), isFalse);
-      expect('2.0.0'.isActualVersion('1.10.0'), isTrue);
-      expect('1_0_0'.isActualVersion('1_0_0', delimiter: '_'), isTrue);
-      expect('1_0_0'.isActualVersion('1_10_0', delimiter: '_'), isFalse);
+      expect('1.0.0'.isNewVersion('1.0.0'), isTrue);
+      expect('2.0.0'.isNewVersion('1.0.0'), isTrue);
+      expect('1.1.0'.isNewVersion('1.0.0'), isTrue);
+      expect('1.0.1'.isNewVersion('1.0.0'), isTrue);
+      expect('1.0.0'.isNewVersion('2.0.0'), isFalse);
+      expect('1.0.0'.isNewVersion('1.1.0'), isFalse);
+      expect('1.0.0'.isNewVersion('1.0.1'), isFalse);
+      expect('2.0.0'.isNewVersion('1.10.0'), isTrue);
+      expect('1_0_0'.isNewVersion('1_0_0', delimiter: '_'), isTrue);
+      expect('1_0_0'.isNewVersion('1_10_0', delimiter: '_'), isFalse);
     });
 
     test('returns value in empty case', () {
