@@ -167,6 +167,22 @@ extension StringX on String {
   bool isStrongPassword([int min = 8]) => hasMatch(
       r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])\S{%s,}$'.format(['$min']));
 
+  /// Whether this [String] is actual version.
+  ///
+  /// Length and [delimiter] of this [String] and [newVersion] must be the same.
+  bool isActualVersion(String newVersion, {String delimiter = '.'}) {
+    final firstVersion = split(delimiter);
+    final secondVersion = newVersion.split(delimiter);
+    var isActual = false;
+    for (var i = 0; i < firstVersion.length; i++) {
+      final firstNumber = int.parse(firstVersion[i]);
+      final secondNumber = int.parse(secondVersion[i]);
+      isActual = firstNumber >= secondNumber;
+      if (firstNumber != secondNumber) break;
+    }
+    return isActual;
+  }
+
   /// Returns this [String] if it's not empty,
   /// otherwise returns [value].
   String ifEmpty(String value) => isEmpty ? value : this;
@@ -201,7 +217,7 @@ extension StringX on String {
   bool get hasSpecialSymbols => specialSymbols.isNotEmpty;
 
   /// Returns char's array of this [String].
-  List<String> get charArray => isBlank ? [] : split('');
+  List<String> get charArray => split('');
 
   /// Returns reversed [String].
   String get reversed => charArray.reversed.join();
@@ -211,7 +227,7 @@ extension StringX on String {
 
   /// Capitalize the first letter of this [String].
   String capitalizeFirst() {
-    if (isBlank) return '';
+    if (isEmpty) return this;
     return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
   }
 
@@ -237,9 +253,6 @@ extension StringX on String {
   /// Whether the regular expression has a match in this [String].
   bool hasMatch(String source) => RegExp(source).hasMatch(this);
 
-  /// Splits this [String] by spaces.
-  List<String> splitBySpaces() => split(' ');
-
   /// Inserts [value] to specified position [index] of this [String].
   String insert(String value, int index) =>
       (charArray..insert(index, value)).join();
@@ -247,7 +260,7 @@ extension StringX on String {
   /// Truncates this [String] if it is longer than the given maximum [length]
   /// and adds [end] to the very end.
   String truncate(int length, {String end = '...'}) {
-    if (isBlank) return '';
+    if (isEmpty) return this;
     return '${substring(0, length)}$end';
   }
 
@@ -264,15 +277,15 @@ extension StringX on String {
   ///
   /// Example: `Hello to all -> Hello To All`.
   String toTitleCase() {
-    if (isBlank) return '';
-    return splitBySpaces().map((word) => word.capitalizeFirst()).join(' ');
+    if (isEmpty) return this;
+    return split(' ').map((word) => word.capitalizeFirst()).join(' ');
   }
 
   /// Converts this [String] to Camel case.
   ///
   /// Example: `Hello to all -> helloToAll`.
   String toCamelCase() {
-    if (isBlank) return '';
+    if (isEmpty) return this;
     final value = toPascalCase();
     return '${value[0].toLowerCase()}${value.substring(1)}';
   }
@@ -281,15 +294,15 @@ extension StringX on String {
   ///
   /// Example: `Hello to all -> HelloToAll`.
   String toPascalCase() {
-    if (isBlank) return '';
-    return splitBySpaces().map((word) => word.capitalizeFirst()).join();
+    if (isEmpty) return this;
+    return split(' ').map((word) => word.capitalizeFirst()).join();
   }
 
   /// Converts this [String] to Snake case.
   ///
   /// Example: `Hello to all -> hello_to_all`.
   String toSnakeCase() {
-    if (isBlank) return '';
+    if (isEmpty) return this;
     return replaceAll(' ', '_').toLowerCase();
   }
 
@@ -297,7 +310,7 @@ extension StringX on String {
   ///
   /// Example: `Hello to all -> hello-to-all`.
   String toKebabCase() {
-    if (isBlank) return '';
+    if (isEmpty) return this;
     return replaceAll(' ', '-').toLowerCase();
   }
 
@@ -305,8 +318,8 @@ extension StringX on String {
   ///
   /// Example: `Hello to all -> Hta`.
   String toAbbreviation() {
-    if (isBlank) return '';
-    return splitBySpaces().map((word) => word[0]).join();
+    if (isEmpty) return this;
+    return split(' ').map((word) => word[0]).join();
   }
 
   /// Converts this [String] to country flag, ignoring lower case and

@@ -1,3 +1,7 @@
+# 1.1.2
+
+- Added `isActualVersion` extension for `String`.
+
 # 1.1.1
 
 - Added `isHex` extension for `String`.

@@ -263,6 +263,19 @@ void main() {
       expect('Qwerty100500!'.isStrongPassword(), isTrue);
     });
 
+    test('checks if string is actual version', () {
+      expect('1.0.0'.isActualVersion('1.0.0'), isTrue);
+      expect('2.0.0'.isActualVersion('1.0.0'), isTrue);
+      expect('1.1.0'.isActualVersion('1.0.0'), isTrue);
+      expect('1.0.1'.isActualVersion('1.0.0'), isTrue);
+      expect('1.0.0'.isActualVersion('2.0.0'), isFalse);
+      expect('1.0.0'.isActualVersion('1.1.0'), isFalse);
+      expect('1.0.0'.isActualVersion('1.0.1'), isFalse);
+      expect('2.0.0'.isActualVersion('1.10.0'), isTrue);
+      expect('1_0_0'.isActualVersion('1_0_0', delimiter: '_'), isTrue);
+      expect('1_0_0'.isActualVersion('1_10_0', delimiter: '_'), isFalse);
+    });
+
     test('returns value in empty case', () {
       final value = 'Hello'.ifEmpty('World');
       expect(value, isA<String>());
@@ -356,6 +369,7 @@ void main() {
 
     test('capitalizes first', () {
       expect(''.capitalizeFirst(), '');
+      expect('h'.capitalizeFirst(), 'H');
       expect('hello'.capitalizeFirst(), 'Hello');
       expect('hello World!'.capitalizeFirst(), 'Hello world!');
     });
@@ -400,12 +414,6 @@ void main() {
       expect(''.hasMatch(''), isTrue);
       expect('hello'.hasMatch('ll'), isTrue);
       expect('hello'.hasMatch(r'^\d+$'), isFalse);
-    });
-
-    test('splits by spaces', () {
-      expect(''.splitBySpaces().toString(), '[]');
-      expect('hello'.splitBySpaces().toString(), '[hello]');
-      expect('Hello World!'.splitBySpaces().toString(), '[Hello, World!]');
     });
 
     test('inserts value', () {
