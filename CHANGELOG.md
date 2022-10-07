@@ -1,3 +1,7 @@
+# 1.1.4
+
+- Added `isSrec` extension for `String`.
+
 # 1.1.3
 
 - Code refactoring.
