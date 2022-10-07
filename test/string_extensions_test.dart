@@ -68,6 +68,11 @@ void main() {
       expect('file.hex'.isHex, isTrue);
     });
 
+    test('checks if string is srec', () {
+      expect('file.txt'.isSrec, isFalse);
+      expect('file.srec'.isSrec, isTrue);
+    });
+
     test('checks if string is vector', () {
       expect('file.png'.isVector, isFalse);
       expect('file.svg'.isVector, isTrue);
