@@ -41,6 +41,9 @@ extension StringX on String {
   /// Whether this [String] is hex.
   bool get isHex => toLowerCase().hasMatch(r'.hex$');
 
+  /// Whether this [String] is srec.
+  bool get isSrec => toLowerCase().hasMatch(r'.srec$');
+
   /// Whether this [String] is vector.
   bool get isVector => toLowerCase().hasMatch(r'.svg$');
 
