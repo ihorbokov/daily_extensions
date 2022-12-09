@@ -47,8 +47,4 @@ extension VoidFunctionX on void Function() {
   void callWhen({required bool predicate}) {
     if (predicate) this();
   }
-
-  /// Returns this [Function] if given [predicate] is true,
-  /// otherwise returns null.
-  void Function()? orNull({required bool predicate}) => predicate ? this : null;
 }

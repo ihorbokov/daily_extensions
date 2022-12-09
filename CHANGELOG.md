@@ -1,3 +1,7 @@
+# 1.1.5
+
+- Added `orNull` extension for any types.
+
 # 1.1.4
 
 - Added `isSrec` extension for `String`.

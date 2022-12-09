@@ -87,14 +87,5 @@ void main() {
       func.callWhen(predicate: value == 0);
       expect(value, 1);
     });
-
-    test('returns function or null', () async {
-      var value = 0;
-      final func = () => value++;
-      expect(func.orNull(predicate: value != 0), isNull);
-      func();
-      expect(func.orNull(predicate: value != 0), isNotNull);
-      expect(func.orNull(predicate: value != 0), isA<void Function()>());
-    });
   });
 }
