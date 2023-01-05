@@ -228,6 +228,20 @@ extension StringX on String {
   /// Converts this [String] to [bool].
   bool asBool() => equalsAny(const ['true', 'yes', 'y', 'on', 'online', '1']);
 
+  /// Converts this [String] to [int].
+  ///
+  /// The [radix] must be in the range 2..36. The digits used are
+  /// first the decimal digits 0..9, and then the letters 'a'..'z' with
+  /// values 10 through 35. Also accepts upper-case letters with the same
+  /// values as the lower-case ones.
+  int asInt({int? radix}) => int.parse(this, radix: radix);
+
+  /// Converts this [String] to [double].
+  double asDouble() => double.parse(this);
+
+  /// Converts this [String] to [num].
+  num asNum() => num.parse(this);
+
   /// Capitalize the first letter of this [String].
   String capitalizeFirst() {
     if (isEmpty) return this;

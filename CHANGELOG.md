@@ -1,3 +1,7 @@
+# 1.1.6
+
+- Added `asInt, asDouble, asNum` extension for `String`.
+
 # 1.1.5
 
 - Added `orNull` extension for any types.

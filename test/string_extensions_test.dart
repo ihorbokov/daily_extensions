@@ -372,6 +372,26 @@ void main() {
       expect('Hello world!'.asBool(), isFalse);
     });
 
+    test('converts to int', () {
+      expect('1'.asInt(), 1);
+      expect('-1'.asInt(), -1);
+      expect('1001'.asInt(), 1001);
+      expect('1100'.asInt(radix: 2), 12);
+    });
+
+    test('converts to double', () {
+      expect('1'.asDouble(), 1.0);
+      expect('-1'.asDouble(), -1.0);
+      expect('1001.5'.asDouble(), 1001.5);
+    });
+
+    test('converts to num', () {
+      expect('1'.asNum(), 1);
+      expect('-1.0'.asNum(), -1.0);
+      expect('1001'.asNum(), 1001);
+      expect('1001.5'.asNum(), 1001.5);
+    });
+
     test('capitalizes first', () {
       expect(''.capitalizeFirst(), '');
       expect('h'.capitalizeFirst(), 'H');
