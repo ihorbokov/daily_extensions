@@ -225,9 +225,6 @@ extension StringX on String {
   /// Returns reversed [String].
   String get reversed => charArray.reversed.join();
 
-  /// Converts this [String] to [bool].
-  bool asBool() => equalsAny(const ['true', 'yes', 'y', 'on', 'online', '1']);
-
   /// Converts this [String] to [int].
   ///
   /// The [radix] must be in the range 2..36. The digits used are
@@ -241,6 +238,12 @@ extension StringX on String {
 
   /// Converts this [String] to [num].
   num asNum() => num.parse(this);
+
+  /// Converts this [String] to [bool].
+  bool asBool() => equalsAny(const ['true', 'yes', 'y', 'on', 'online', '1']);
+
+  /// Converts this [String] to [DateTime].
+  DateTime asDateTime() => DateTime.parse(this);
 
   /// Capitalize the first letter of this [String].
   String capitalizeFirst() {

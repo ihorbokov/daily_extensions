@@ -1,3 +1,7 @@
+# 1.1.7
+
+- Added `asDateTime` extension for `String`.
+
 # 1.1.6
 
 - Added `asInt, asDouble, asNum` extension for `String`.

@@ -354,24 +354,6 @@ void main() {
       expect('Hello world!'.reversed, '!dlrow olleH');
     });
 
-    test('converts to bool', () {
-      expect('true'.asBool(), isTrue);
-      expect('false'.asBool(), isFalse);
-      expect('TRUE'.asBool(), isTrue);
-      expect('FALSE'.asBool(), isFalse);
-      expect('Yes'.asBool(), isTrue);
-      expect('No'.asBool(), isFalse);
-      expect('oN'.asBool(), isTrue);
-      expect('oFF'.asBool(), isFalse);
-      expect('y'.asBool(), isTrue);
-      expect('N'.asBool(), isFalse);
-      expect('1'.asBool(), isTrue);
-      expect('0'.asBool(), isFalse);
-      expect('online'.asBool(), isTrue);
-      expect('Offline'.asBool(), isFalse);
-      expect('Hello world!'.asBool(), isFalse);
-    });
-
     test('converts to int', () {
       expect('1'.asInt(), 1);
       expect('-1'.asInt(), -1);
@@ -390,6 +372,35 @@ void main() {
       expect('-1.0'.asNum(), -1.0);
       expect('1001'.asNum(), 1001);
       expect('1001.5'.asNum(), 1001.5);
+    });
+
+    test('converts to bool', () {
+      expect('true'.asBool(), isTrue);
+      expect('false'.asBool(), isFalse);
+      expect('TRUE'.asBool(), isTrue);
+      expect('FALSE'.asBool(), isFalse);
+      expect('Yes'.asBool(), isTrue);
+      expect('No'.asBool(), isFalse);
+      expect('oN'.asBool(), isTrue);
+      expect('oFF'.asBool(), isFalse);
+      expect('y'.asBool(), isTrue);
+      expect('N'.asBool(), isFalse);
+      expect('1'.asBool(), isTrue);
+      expect('0'.asBool(), isFalse);
+      expect('online'.asBool(), isTrue);
+      expect('Offline'.asBool(), isFalse);
+      expect('Hello world!'.asBool(), isFalse);
+    });
+
+    test('converts to DateTime', () {
+      expect(
+        '2023-01-05'.asDateTime(),
+        DateTime(2023, 1, 5),
+      );
+      expect(
+        '2023-01-05T16:39:52'.asDateTime(),
+        DateTime(2023, 1, 5, 16, 39, 52),
+      );
     });
 
     test('capitalizes first', () {
