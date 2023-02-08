@@ -18,7 +18,7 @@ void main() {
 
     test('returns value in empty case', () {
       final list = testList.ifEmpty([2]);
-      expect(list, isA<List>());
+      expect(list, isA<List<int>>());
       expect(list.toString(), '[1, 2, 3, 4, 5]');
       expect(testEmptyList.ifEmpty(testList).toString(), '[1, 2, 3, 4, 5]');
     });
@@ -37,7 +37,7 @@ void main() {
 
     test('creates empty modifiable list if current is null', () {
       final list = testNullableList.orEmpty;
-      expect(list, isA<List>());
+      expect(list, isA<List<int>>());
       expect(list.toString(), '[]');
       expect((list..add(1)).toString(), '[1]');
     });
@@ -50,14 +50,14 @@ void main() {
 
     test('returns value in empty case', () {
       final set = testSet.ifEmpty({2});
-      expect(set, isA<Set>());
+      expect(set, isA<Set<int>>());
       expect(set.toString(), '{1, 2, 3, 4, 5}');
       expect(testEmptySet.ifEmpty(testSet).toString(), '{1, 2, 3, 4, 5}');
     });
 
     test('creates empty modifiable set if current is null', () {
       final set = testNullableSet.orEmpty;
-      expect(set, isA<Set>());
+      expect(set, isA<Set<int>>());
       expect(set.toString(), '{}');
       expect((set..add(1)).toString(), '{1}');
     });
@@ -88,7 +88,7 @@ void main() {
 
     test('returns value in empty case', () {
       final iterable = testIterable.ifEmpty([2]);
-      expect(iterable, isA<Iterable>());
+      expect(iterable, isA<Iterable<int>>());
       expect(iterable.toString(), '(1, 2, 3, 4, 5)');
       expect(
         testEmptyIterable.ifEmpty(testIterable).toString(),
@@ -98,7 +98,7 @@ void main() {
 
     test('creates fixed-length list', () {
       final list = testIterable.toFixedList();
-      expect(list, isA<List>());
+      expect(list, isA<List<int>>());
       expect(() => list.add(6), throwsUnsupportedError);
       expect(() => list.remove(5), throwsUnsupportedError);
       list[1] = 1;
@@ -107,7 +107,7 @@ void main() {
 
     test('creates unmodifiable list', () {
       final list = testIterable.toUnmodifiableList();
-      expect(list, isA<List>());
+      expect(list, isA<List<int>>());
       expect(() => list.add(6), throwsUnsupportedError);
       expect(() => list.remove(5), throwsUnsupportedError);
       expect(() => list[1] = 1, throwsUnsupportedError);
@@ -115,32 +115,32 @@ void main() {
 
     test('creates unmodifiable set', () {
       final set = testIterable.toUnmodifiableSet();
-      expect(set, isA<Set>());
+      expect(set, isA<Set<int>>());
       expect(() => set.add(6), throwsUnsupportedError);
       expect(() => set.remove(5), throwsUnsupportedError);
     });
 
     test('maps iterable to list', () {
       final list = testIterable.mapToList((element) => element * element);
-      expect(list, isA<List>());
+      expect(list, isA<List<int>>());
       expect(list.toString(), '[1, 4, 9, 16, 25]');
     });
 
     test('maps iterable to list with predicate', () {
       final list = testIterable.mapToListWhere(
         (element) => element * element,
-        (element) => element % 2 == 0,
+        (element) => element.isEven,
         growable: true,
       );
-      expect(list, isA<List>());
+      expect(list, isA<List<int>>());
       expect(list.toString(), '[4, 16]');
       expect((list..add(25)).toString(), '[4, 16, 25]');
 
       final fixedList = testIterable.mapToListWhere(
         (element) => element * element,
-        (element) => element % 2 == 0,
+        (element) => element.isEven,
       );
-      expect(fixedList, isA<List>());
+      expect(fixedList, isA<List<int>>());
       expect(fixedList.toString(), '[4, 16]');
       expect(() => fixedList.add(25), throwsUnsupportedError);
     });
@@ -150,14 +150,14 @@ void main() {
         (element) => element * element,
         modifiable: true,
       );
-      expect(set, isA<Set>());
+      expect(set, isA<Set<int>>());
       expect(set.toString(), '{1, 4, 9, 16, 25}');
       expect((set..add(36)).toString(), '{1, 4, 9, 16, 25, 36}');
 
       final unmodifiableSet = testIterable.mapToSet(
         (element) => element * element,
       );
-      expect(unmodifiableSet, isA<Set>());
+      expect(unmodifiableSet, isA<Set<int>>());
       expect(unmodifiableSet.toString(), '{1, 4, 9, 16, 25}');
       expect(() => unmodifiableSet.add(36), throwsUnsupportedError);
     });
@@ -165,18 +165,18 @@ void main() {
     test('maps iterable to set with predicate', () {
       final set = testIterable.mapToSetWhere(
         (element) => element * element,
-        (element) => element % 2 == 0,
+        (element) => element.isEven,
         modifiable: true,
       );
-      expect(set, isA<Set>());
+      expect(set, isA<Set<int>>());
       expect(set.toString(), '{4, 16}');
       expect((set..add(25)).toString(), '{4, 16, 25}');
 
       final unmodifiableSet = testIterable.mapToSetWhere(
         (element) => element * element,
-        (element) => element % 2 == 0,
+        (element) => element.isEven,
       );
-      expect(unmodifiableSet, isA<Set>());
+      expect(unmodifiableSet, isA<Set<int>>());
       expect(unmodifiableSet.toString(), '{4, 16}');
       expect(() => unmodifiableSet.add(25), throwsUnsupportedError);
     });
@@ -187,7 +187,7 @@ void main() {
 
     test('creates empty iterable if current is null', () {
       final iterable = testNullableIterable.orEmpty;
-      expect(iterable, isA<Iterable>());
+      expect(iterable, isA<Iterable<int>>());
       expect(iterable.toString(), '()');
     });
 
@@ -223,21 +223,21 @@ void main() {
 
     test('returns value in empty case', () {
       final map = testMap.ifEmpty({1: 'Hello'});
-      expect(map, isA<Map>());
+      expect(map, isA<Map<int, String>>());
       expect(map.toString(), '{2022: Mary}');
       expect(testEmptyMap.ifEmpty(testMap).toString(), '{2022: Mary}');
     });
 
     test('creates unmodifiable map', () {
       final map = testMap.toUnmodifiableMap();
-      expect(map, isA<Map>());
+      expect(map, isA<Map<int, String>>());
       expect(() => map[2023] = 'Hello', throwsUnsupportedError);
       expect(() => map.remove(2022), throwsUnsupportedError);
     });
 
     test('creates empty modifiable map if current is null', () {
       final map = testNullableMap.orEmpty;
-      expect(map, isA<Map>());
+      expect(map, isA<Map<int, String>>());
       expect(map.toString(), '{}');
       expect((map..[2022] = 'Mary').toString(), '{2022: Mary}');
     });

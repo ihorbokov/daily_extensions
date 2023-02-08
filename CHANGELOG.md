@@ -1,3 +1,7 @@
+# 1.1.8
+
+- Updated analysis rules.
+
 # 1.1.7
 
 - Added `asDateTime` extension for `String`.

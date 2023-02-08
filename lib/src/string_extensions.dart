@@ -14,20 +14,22 @@ extension StringX on String {
   bool get isNum => num.tryParse(this) != null;
 
   /// Whether this [String] is [bool].
-  bool get isBool => equalsAny(const [
-        'true',
-        'false',
-        'yes',
-        'no',
-        'y',
-        'n',
-        'on',
-        'off',
-        'online',
-        'offline',
-        '1',
-        '0',
-      ]);
+  bool get isBool {
+    return equalsAny(const [
+      'true',
+      'false',
+      'yes',
+      'no',
+      'y',
+      'n',
+      'on',
+      'off',
+      'online',
+      'offline',
+      '1',
+      '0',
+    ]);
+  }
 
   /// Whether this [String] consists only Latin letters.
   bool get isAlphabetic => hasMatch(r'^[a-zA-Z]+$');
@@ -79,34 +81,52 @@ extension StringX on String {
   bool get isHtml => toLowerCase().hasMatch(r'.html$');
 
   /// Whether this [String] is url.
-  bool get isUrl => hasMatch(
-      r"^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?))\://)?(www.|[a-zA-Z0-9].)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,6}(\:[0-9]{1,5})*(/($|[a-zA-Z0-9\.\,\;\?\'\\\+&amp;%\$#\=~_\-]+))*$");
+  bool get isUrl {
+    return hasMatch(
+      r"^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?))\://)?(www.|[a-zA-Z0-9].)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,6}(\:[0-9]{1,5})*(/($|[a-zA-Z0-9\.\,\;\?\'\\\+&amp;%\$#\=~_\-]+))*$",
+    );
+  }
 
   /// Whether this [String] is email.
-  bool get isEmail => hasMatch(
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+  bool get isEmail {
+    return hasMatch(
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$',
+    );
+  }
 
   /// Whether this [String] is DateTime.
   bool get isDateTime => DateTime.tryParse(this) != null;
 
   /// Whether this [String] is Social Security number.
-  bool get isSsn => hasMatch(
-      r'^(?!0{3}|6{3}|9[0-9]{2})[0-9]{3}-?(?!0{2})[0-9]{2}-?(?!0{4})[0-9]{4}$');
+  bool get isSsn {
+    return hasMatch(
+      r'^(?!0{3}|6{3}|9[0-9]{2})[0-9]{3}-?(?!0{2})[0-9]{2}-?(?!0{4})[0-9]{4}$',
+    );
+  }
 
   /// Whether this [String] is Passport No.
   bool get isPassport => hasMatch(r'^(?!^0+$)[a-zA-Z0-9]{6,9}$');
 
   /// Whether this [String] is ISBN.
-  bool get isIsbn => hasMatch(
-      r'(ISBN(\-1[03])?[:]?[ ]?)?(([0-9Xx][- ]?){13}|([0-9Xx][- ]?){10})');
+  bool get isIsbn {
+    return hasMatch(
+      r'(ISBN(\-1[03])?[:]?[ ]?)?(([0-9Xx][- ]?){13}|([0-9Xx][- ]?){10})',
+    );
+  }
 
   /// Whether this [String] is credit or debit card.
-  bool get isCreditCard => hasMatch(
-      r'^(?:3[47]\d{2}([\- ]?)\d{6}\1\d{5}|(?:4\d{3}|5[1-5]\d{2}|6011)([\- ]?)\d{4}\2\d{4}\2\d{4})$');
+  bool get isCreditCard {
+    return hasMatch(
+      r'^(?:3[47]\d{2}([\- ]?)\d{6}\1\d{5}|(?:4\d{3}|5[1-5]\d{2}|6011)([\- ]?)\d{4}\2\d{4}\2\d{4})$',
+    );
+  }
 
   /// Whether this [String] is currency.
-  bool get isCurrency => hasMatch(
-      r'^(S?\$|\₩|Rp|\¥|\€|\₹|\₽|fr|R\$|R)?[ ]?[-]?([0-9]{1,3}[,.]([0-9]{3}[,.])*[0-9]{3}|[0-9]+)([,.][0-9]{1,2})?( ?(USD?|AUD|NZD|CAD|CHF|GBP|CNY|EUR|JPY|IDR|MXN|NOK|KRW|TRY|INR|RUB|BRL|ZAR|SGD|MYR))?$');
+  bool get isCurrency {
+    return hasMatch(
+      r'^(S?\$|\₩|Rp|\¥|\€|\₹|\₽|fr|R\$|R)?[ ]?[-]?([0-9]{1,3}[,.]([0-9]{3}[,.])*[0-9]{3}|[0-9]+)([,.][0-9]{1,2})?( ?(USD?|AUD|NZD|CAD|CHF|GBP|CNY|EUR|JPY|IDR|MXN|NOK|KRW|TRY|INR|RUB|BRL|ZAR|SGD|MYR))?$',
+    );
+  }
 
   /// Whether this [String] is MD5.
   bool get isMd5 => hasMatch(r'^[a-f0-9]{32}$');
@@ -120,8 +140,11 @@ extension StringX on String {
       hasMatch(r'([A-Fa-f0-9]{2}\:){31}[A-Fa-f0-9]{2}|[A-Fa-f0-9]{64}');
 
   /// Whether this [String] is Base64.
-  bool get isBase64 => hasMatch(
-      r'^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=|[A-Za-z0-9+\/]{4})$');
+  bool get isBase64 {
+    return hasMatch(
+      r'^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=|[A-Za-z0-9+\/]{4})$',
+    );
+  }
 
   /// Whether this [String] is binary.
   bool get isBinary => hasMatch(r'^[0-1]+$');
@@ -131,15 +154,21 @@ extension StringX on String {
       hasMatch(r'^(?:(?:^|\.)(?:2(?:5[0-5]|[0-4]\d)|1?\d?\d)){4}$');
 
   /// Whether this [String] is IPv6.
-  bool get isIPv6 => hasMatch(
-      r'^((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(([0-9A-Fa-f]{1,4}:){0,5}:((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(::([0-9A-Fa-f]{1,4}:){0,5}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))$');
+  bool get isIPv6 {
+    return hasMatch(
+      r'^((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(([0-9A-Fa-f]{1,4}:){0,5}:((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(::([0-9A-Fa-f]{1,4}:){0,5}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))$',
+    );
+  }
 
   /// Whether this [String] is hexadecimal.
   bool get isHexadecimal => hasMatch(r'^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$');
 
   /// Whether this [String] is UUID.
-  bool get isUuid => hasMatch(
-      r'^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$');
+  bool get isUuid {
+    return hasMatch(
+      r'^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$',
+    );
+  }
 
   /// Whether this [String] is phone number in length range
   /// between excluded [min] and [max].
@@ -168,7 +197,8 @@ extension StringX on String {
   /// should consist of any characters except of spaces, but at least:
   /// `1 upper case letter, 1 lower case letter, 1 digit and 1 symbol`.
   bool isStrongPassword([int min = 8]) => hasMatch(
-      r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])\S{%s,}$'.format(['$min']));
+        r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])\S{%s,}$'.format(['$min']),
+      );
 
   /// Whether this [String] is new version.
   ///
@@ -198,10 +228,10 @@ extension StringX on String {
   String get digits => remove(RegExp(r'\D'));
 
   /// Returns Latin letters of this [String].
-  String get letters => remove(RegExp(r'[^a-zA-Z]'));
+  String get letters => remove(RegExp('[^a-zA-Z]'));
 
   /// Returns symbols of this [String].
-  String get symbols => remove(RegExp(r'[a-zA-Z0-9 ]'));
+  String get symbols => remove(RegExp('[a-zA-Z0-9 ]'));
 
   /// Returns special symbols of this [String].
   String get specialSymbols =>
@@ -261,10 +291,10 @@ extension StringX on String {
   String removeDigits() => remove(RegExp(r'(\d+)'));
 
   /// Removes all Latin letters from this [String].
-  String removeLetters() => remove(RegExp(r'([a-zA-Z]+)'));
+  String removeLetters() => remove(RegExp('([a-zA-Z]+)'));
 
   /// Removes all symbols from this [String].
-  String removeSymbols() => remove(RegExp(r'([^a-zA-Z0-9 ]+)'));
+  String removeSymbols() => remove(RegExp('([^a-zA-Z0-9 ]+)'));
 
   /// Removes all special symbols from this [String].
   String removeSpecialSymbols() =>

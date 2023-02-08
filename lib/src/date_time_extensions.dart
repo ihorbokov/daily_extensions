@@ -1,4 +1,4 @@
-import 'number_extensions.dart';
+import 'package:daily_extensions/src/number_extensions.dart';
 
 /// Extensions for [DateTime].
 extension DateTimeX on DateTime {

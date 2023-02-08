@@ -1,5 +1,5 @@
-import 'collection_extensions.dart';
-import 'string_extensions.dart';
+import 'package:daily_extensions/src/collection_extensions.dart';
+import 'package:daily_extensions/src/string_extensions.dart';
 
 /// Extensions for [int].
 extension IntX on int {

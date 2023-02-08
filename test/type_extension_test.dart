@@ -5,7 +5,7 @@ void main() {
   group('T Extensions', () {
     test('returns object or null', () async {
       var value = 0;
-      final func = () => value++;
+      void func() => value++;
       expect(9.orNull(predicate: value != 0), isNull);
       expect('Hello'.orNull(predicate: value != 0), isNull);
       expect(func.orNull(predicate: value != 0), isNull);

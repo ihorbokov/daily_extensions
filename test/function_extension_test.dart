@@ -5,7 +5,7 @@ void main() {
   group('void Function() Extensions', () {
     test('invokes one time during duration', () async {
       var value = 0;
-      final func = () => value++;
+      void func() => value++;
 
       for (var i = 0; i <= 5; i++) {
         func.throttle();
@@ -27,7 +27,7 @@ void main() {
 
     test('invokes the last call after given duration', () async {
       var value = 0;
-      final func = () => value++;
+      void func() => value++;
 
       for (var i = 0; i <= 5; i++) {
         func.debounce();
@@ -47,7 +47,7 @@ void main() {
 
     test('invokes after duration', () async {
       var value = 0;
-      final func = () => value++;
+      void func() => value++;
 
       func.delayed();
       expect(value, 0);
@@ -59,15 +59,14 @@ void main() {
       await Future<void>.delayed(const Duration(seconds: 2));
       expect(value, 2);
 
-      final timer = func.delayed();
-      timer.cancel();
+      func.delayed().cancel();
       await Future<void>.delayed(const Duration(seconds: 1));
       expect(value, 2);
     });
 
     test('invokes periodically', () async {
       var value = 0;
-      final func = () => value++;
+      void func() => value++;
       final timer = func.periodic();
       expect(value, 0);
       await Future<void>.delayed(const Duration(seconds: 1));
@@ -81,7 +80,7 @@ void main() {
 
     test('invokes by predicate', () async {
       var value = 0;
-      final func = () => value++;
+      void func() => value++;
       func.callWhen(predicate: value != 0);
       expect(value, 0);
       func.callWhen(predicate: value == 0);
