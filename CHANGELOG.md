@@ -1,3 +1,7 @@
+# 1.1.9
+
+- Updated analysis library.
+
 # 1.1.8
 
 - Updated analysis rules.

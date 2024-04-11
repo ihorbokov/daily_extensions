@@ -235,7 +235,7 @@ extension StringX on String {
 
   /// Returns special symbols of this [String].
   String get specialSymbols =>
-      remove(RegExp(r'[^/!@#$%^\-&*()+",.?":{}|<>~_-`]'));
+      remove(RegExp(r'[^/!@#$%^\-&*()+",.?:{}|<>~_-`]'));
 
   /// Returns true if this [String] contains digits.
   bool get hasDigits => digits.isNotEmpty;
@@ -298,7 +298,7 @@ extension StringX on String {
 
   /// Removes all special symbols from this [String].
   String removeSpecialSymbols() =>
-      remove(RegExp(r'[/!@#$%^\-&*()+",.?":{}|<>~_-`]'));
+      remove(RegExp(r'[/!@#$%^\-&*()+",.?:{}|<>~_-`]'));
 
   /// Whether the regular expression has a match in this [String].
   bool hasMatch(String source) => RegExp(source).hasMatch(this);
