@@ -34,7 +34,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static const _demoNumber = 3.0;
   static const _demoList = [1, 3, 2, 3, 4, 3, 3];
-  static const _demoEmail = 'info@phimary.com';
+  static const _demoEmail = 'info@ihorbokov.com';
 
   @override
   Widget build(BuildContext context) {

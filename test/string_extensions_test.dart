@@ -146,17 +146,17 @@ void main() {
     });
 
     test('checks if string is url', () {
-      expect('http://phimary.com'.isUrl, isTrue);
-      expect('http://phimary.com/'.isUrl, isTrue);
-      expect('https://phimary.com/'.isUrl, isTrue);
-      expect('phimary.com'.isUrl, isTrue);
-      expect('info@phimary.com'.isUrl, isFalse);
+      expect('http://ihorbokov.com'.isUrl, isTrue);
+      expect('http://ihorbokov.com/'.isUrl, isTrue);
+      expect('https://ihorbokov.com/'.isUrl, isTrue);
+      expect('ihorbokov.com'.isUrl, isTrue);
+      expect('info@ihorbokov.com'.isUrl, isFalse);
     });
 
     test('checks if string is email', () {
-      expect('info@phimary.com'.isEmail, isTrue);
-      expect('info@phimary'.isEmail, isFalse);
-      expect('info@phimary.c'.isEmail, isFalse);
+      expect('info@ihorbokov.com'.isEmail, isTrue);
+      expect('info@ihorbokov'.isEmail, isFalse);
+      expect('info@ihorbokov.c'.isEmail, isFalse);
     });
 
     test('checks if string is DateTime', () {
