@@ -1,37 +1,51 @@
 name: build
 
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+on: [ push, pull_request ]
+
+permissions:
+  contents: read
+  security-events: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter environment
+        uses: subosito/flutter-action@v2
 
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Format
+      - name: Format code
         run: dart format --output=none --set-exit-if-changed .
 
-      - name: Analyze
+      - name: Analyze code
         run: dart analyze
 
-      - name: Run Tests
+      - name: Run tests and generate coverage report
         run: |
-          dart pub global activate coverage
-          dart test --coverage=coverage && dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib
+          flutter pub global activate coverage
+          flutter test --coverage
+          dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib
 
-      - name: Verify coverage report exists
-        run: ls -l coverage/lcov.info
+      - name: Display coverage report info
+        run: |
+          ls -l coverage/lcov.info
+          cat coverage/lcov.info
 
-      - name: Upload coverage reports to Codecov
+      - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true
+
+      - name: Manual Coverage Upload Debug (Optional)
+        run: |
+          curl -s https://codecov.io/bash | bash -s -- -t ${{ secrets.CODECOV_TOKEN }} -f coverage/lcov.info
