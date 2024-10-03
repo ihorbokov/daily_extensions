@@ -1,10 +1,6 @@
 name: build
 
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+on: [ push, pull_request ]
 
 jobs:
   build:
@@ -14,24 +10,22 @@ jobs:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
 
-      - name: Install dependencies
+      - name: 📦 Install Dependencies
         run: flutter pub get
 
-      - name: Format
-        run: dart format --output=none --set-exit-if-changed .
+      - name: ✨ Format
+        run: dart format --set-exit-if-changed .
 
-      - name: Analyze
+      - name: 🔍 Analyze
         run: dart analyze
 
-      - name: Run Tests
+      - name: 🧪 Test
         run: |
-          dart pub global activate coverage
-          dart test --coverage=coverage && dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage/lcov.info --report-on=lib
+          if [ -d "test" ]; then
+            flutter test --no-pub --test-randomize-ordering-seed random --coverage
+          fi
 
-      - name: Verify coverage report exists
-        run: ls -l coverage/lcov.info
-
-      - name: Upload coverage reports to Codecov
+      - name: ⬆️ Upload Coverage
         uses: codecov/codecov-action@v4.0.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
